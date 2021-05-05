@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ionos server setup &#8212; SafetyNet Tech data analytics manual</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How many trawls do we need to sample to make sure we can detect a biologically important effect?" href="../power/trialpower.html" />
+    <link rel="prev" title="SafetyNet Technologies data analytics manifesto" href="../landing-page.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/safetynet_logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">SafetyNet Tech data analytics manual</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landing-page.html">
+   SafetyNet Technologies data analytics manifesto
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Ionos VPS server
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Ionos server setup
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Trial design and statistical power
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../power/trialpower.html">
+   How many trawls do we need to sample to make sure we can detect a biologically important effect?
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ionosserver/ionosserversetup.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://csyms-ecol.github.io/sntechdata"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://csyms-ecol.github.io/sntechdata/issues/new?title=Issue%20on%20page%20%2Fionosserver/ionosserversetup.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#this-document-outlines-the-setup-of-the-virtual-private-server-vps-on-ionos">
+   This document outlines the setup of the Virtual Private Server (VPS) on Ionos
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-users">
+   Setting up users
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python">
+   Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mariadb-mysql">
+   MariaDB/MySQL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#r-and-shiny">
+   R and Shiny
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shiny-app-maintenance">
+   Shiny App maintenance
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ionos-server-setup">
+<h1>Ionos server setup<a class="headerlink" href="#ionos-server-setup" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="this-document-outlines-the-setup-of-the-virtual-private-server-vps-on-ionos">
+<h2>This document outlines the setup of the Virtual Private Server (VPS) on Ionos<a class="headerlink" href="#this-document-outlines-the-setup-of-the-virtual-private-server-vps-on-ionos" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>The first steps are carried out via the Ionos administrator dashboard, which is accessed using the <a class="reference external" href="mailto:billing&#37;&#52;&#48;sntech&#46;co&#46;uk">billing<span>&#64;</span>sntech<span>&#46;</span>co<span>&#46;</span>uk</a> account.</p></li>
+</ol>
+<div class="figure align-default">
+<img alt="../_images/IonosScreen1.png" src="../_images/IonosScreen1.png" />
+</div>
+<ol class="simple">
+<li><p>Once you tell Ionos what type of VPS you want, they will provision it and then it will become visible in the Server link. I have installed an Ubuntu 20.04 server. There are a few good reasons for this. Linux is far more secure than a Windows server. Ubuntu 20.04 is a stable, long-term release. It is not as cutting edge, but that is a good thing. Not all software has been modified for the latest operating system versions.<br />
+Ubuntu 20.04 ships with Python 3.8.5, which is preferable to 3.9 because many Python libraries including tensorflow are not available for 3.9 yet. However, we need to update a few elements which I will show later.</p></li>
+</ol>
+<div class="figure align-default">
+<img alt="../_images/IonosScreen2.png" src="../_images/IonosScreen2.png" />
+</div>
+<ol class="simple">
+<li><p>There are some firewall modifications that need to be implemented. R Shiny uses port 3838, so we set the firewall to accept all incoming TCP connections</p></li>
+<li><p>Most of the additional server options such as reverse proxies are set up using the Plesk desktop. But to run Plesk you need to enable the following ports to accept all TCP connections in the firewall:<br />
+195.214.233.80:5224<br />
+195.214.233.80:443<br />
+195.214.233.81:5224<br />
+195.214.233.81:443<br />
+195.214.233.82:5224<br />
+195.214.233.82:443<br />
+Now you can access the Plesk desktop by pointing the browser to:<br />
+<a class="reference external" href="https://77.68.125.129:8443">https://77.68.125.129:8443</a></p></li>
+</ol>
+</div>
+<div class="section" id="setting-up-users">
+<h2>Setting up users<a class="headerlink" href="#setting-up-users" title="Permalink to this headline">¶</a></h2>
+<p>By default there is a superuser called ‘root’, which uses the Ionos password. As general advice in Unix systems <strong>avoid doing anything as root</strong>. A careless keystroke can irreparably destroy things.</p>
+<p>What we do instead is set up users with root privileges. For the most part these users can’t screw up anything other than their own setup <em>unless</em> they prefix the command with <strong>sudo</strong>, which approximates as SuperUser DO.</p>
+<p>We first secure shell into the system (here, via Linux - I don’t have ssh instructions for Windows):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">root</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
+
+<span class="o">&gt;</span><span class="n">Password</span><span class="p">:</span> <span class="n">XXXXXXXXXX</span> 
+
+</pre></div>
+</div>
+<p>Now we add users. I’ve added myself, and a sntech user with root privileges. Note the <strong>usermod -aG sudo</strong> grants the user sudo privileges:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adduser</span> <span class="n">craig</span>
+<span class="o">&gt;</span><span class="n">craigspassword</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">sudo</span> <span class="n">craig</span>
+
+<span class="n">adduser</span> <span class="n">sntech</span>
+<span class="o">&gt;</span><span class="n">sntechspassword</span>
+<span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">sudo</span> <span class="n">sntech</span>
+
+</pre></div>
+</div>
+<p>Once we are done here, log out as root and back in as your username. The command is <strong>su</strong> or switch user:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">su</span> <span class="n">craig</span>
+
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Avoid logging in as root at all costs!</p>
+</div>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>Python 3.8.5 is already installed (as is 2.7.18), but pip3 isn’t. I use pip3 instead of anaconda to maintain Python packages. That’s just personal preference, because I’ve had bad experiences with Anaconda.<br />
+Update the system, and install pip and some other libraries that are useful:</p>
+<p>sudo apt-get update<br />
+sudo apt install python3-pip<br />
+sudo apt install -y build-essential libssl-dev libffi-dev python3-dev<br />
+sudo apt install debian-keyring g++-multilib g++-9-multilib gcc-9-doc bzr libstdc++-9-doc<br />
+sudo apt install -y python3-venv</p>
+</div>
+<div class="section" id="mariadb-mysql">
+<h2>MariaDB/MySQL<a class="headerlink" href="#mariadb-mysql" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note:</strong> Installation notes are on <a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-ubuntu-20-04</a><br />
+MariaDB ships with Ubuntu 20.04, so there is no need to install it. However, on a new installation, MariaDB is completely open with no security, so we need to correct this.<br />
+Run this to secure it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mysql_secure_installation</span>
+
+</pre></div>
+</div>
+<p>There is no initial root password, so press &lt;enter&gt;.
+You will be prompted to set the root password. <strong>Note:</strong> This should not be the same as any other password. The database password is not the same as a user password. They are separate entities.</p>
+<p>You will be prompted with a series of questions. Select Y for each question. This will remove the insecure initial options. Now quit mariadb.</p>
+<p>Now we need to add regular users. First I will make an admin user with all privileges, and one for myself. Start mariadb as root:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mariadb</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="s1">&#39;admin&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="s1">&#39;admindbpassword&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
+<span class="n">exit</span>
+
+<span class="n">sudo</span> <span class="n">mariadb</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="s1">&#39;craig&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="s1">&#39;craigdbpassword&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
+<span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
+<span class="n">exit</span>
+</pre></div>
+</div>
+<p>Now we will run a few status checks. If for some reason MariaDB is not running, we can start it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Check status</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">mariadb</span>
+
+<span class="c1">#Should be running fine. If not:</span>
+<span class="c1">#sudo systemctl start mariadb</span>
+
+<span class="c1"># Extra checks...</span>
+<span class="n">sudo</span> <span class="n">mysqladmin</span> <span class="n">version</span>
+
+<span class="c1"># Check the admin password authentication</span>
+<span class="n">mysqladmin</span> <span class="o">-</span><span class="n">u</span> <span class="n">admin</span> <span class="o">-</span><span class="n">p</span> <span class="n">version</span>
+
+</pre></div>
+</div>
+<p>This completes the MariaDB installation process</p>
+</div>
+<div class="section" id="r-and-shiny">
+<h2>R and Shiny<a class="headerlink" href="#r-and-shiny" title="Permalink to this headline">¶</a></h2>
+<p>R is not installed by default, so we have to grab it. There are a few steps to ensure we have core libraries, but also allow the user to install libraries that R studio decided we didn’t need.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">upgrade</span>
+
+<span class="c1">#R Shiny</span>
+
+<span class="c1"># update indices</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span> <span class="o">-</span><span class="n">qq</span>
+<span class="c1"># install two helper packages we need</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">recommends</span> <span class="n">software</span><span class="o">-</span><span class="n">properties</span><span class="o">-</span><span class="n">common</span> <span class="n">dirmngr</span>
+<span class="c1"># import the signing key (by Michael Rutter) for these repos</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">adv</span> <span class="o">--</span><span class="n">keyserver</span> <span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span> <span class="n">E298A3A825C0D65DFD57CBB651716619E084DAB9</span>
+<span class="c1"># add the R 4.0 repo from CRAN -- adjust &#39;focal&#39; to &#39;groovy&#39; or &#39;bionic&#39; as needed</span>
+<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="s2">&quot;deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/&quot;</span>
+
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">recommends</span> <span class="n">r</span><span class="o">-</span><span class="n">base</span>
+
+<span class="c1">#Add 5000+ Cran repositories</span>
+<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">c2d4u</span><span class="o">.</span><span class="n">team</span><span class="o">/</span><span class="n">c2d4u4</span><span class="o">.</span><span class="mi">0</span><span class="o">+</span>
+
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">recommends</span> <span class="n">r</span><span class="o">-</span><span class="n">cran</span><span class="o">-</span><span class="n">rstan</span> 
+
+</pre></div>
+</div>
+<p>Now onto the Shiny server itself. Note Ubuntu 14 does indeed seem to be the latest version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span> <span class="o">-</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;R -e </span><span class="se">\&quot;</span><span class="s2">install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">gdebi</span><span class="o">-</span><span class="n">core</span>
+<span class="n">sudo</span> <span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download3</span><span class="o">.</span><span class="n">rstudio</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="n">shiny</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">16.958</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
+<span class="n">sudo</span> <span class="n">gdebi</span> <span class="n">shiny</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="mf">1.5</span><span class="o">.</span><span class="mf">16.958</span><span class="o">-</span><span class="n">amd64</span><span class="o">.</span><span class="n">deb</span>
+</pre></div>
+</div>
+<p>This server setup takes care of all of the restarting when down and all the other issues. It is probably the most painless way of getting things up and running.</p>
+<p>Check status:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">status</span> <span class="n">shiny</span><span class="o">-</span><span class="n">server</span>
+</pre></div>
+</div>
+<p>Now, point a browser to: <a class="reference external" href="http://77.68.125.129:3838/sample-apps/hello">http://77.68.125.129:3838/sample-apps/hello</a><br />
+You should see the <em>hello world</em> version of a Shiny program. Remember, the firewall must be set so port 3838 will accept all incoming TCP connections, so if you see nothing - check that.</p>
+</div>
+<div class="section" id="shiny-app-maintenance">
+<h2>Shiny App maintenance<a class="headerlink" href="#shiny-app-maintenance" title="Permalink to this headline">¶</a></h2>
+<p>The best approach to maintain Shiny Apps is by using Github. This link: <a class="reference external" href="https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/#shiny-git">https://deanattali.com/2015/05/09/setup-rstudio-shiny-server-digital-ocean/#shiny-git</a> is written for DigitalOcean, and is pretty good.</p>
+<p>Using github makes commits and updates easier, without having to login and FTP.</p>
+<p>I have a github account called <strong>sntech-analytics</strong>.</p>
+<p>First, we set up a github link on the server. Note the ‘.’ after the chown is deliberate. But I don’t think the statements are necessary, so I commented them out.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">craig</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
+<span class="n">craigspassword</span>
+
+<span class="n">sudo</span> <span class="n">groupadd</span> <span class="n">shiny</span><span class="o">-</span><span class="n">apps</span>
+
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">shiny</span><span class="o">-</span><span class="n">apps</span> <span class="n">craig</span>
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">shiny</span><span class="o">-</span><span class="n">apps</span> <span class="n">sntech</span>
+<span class="c1">#This user is required. It is the default shiny user</span>
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">shiny</span><span class="o">-</span><span class="n">apps</span> <span class="n">shiny</span>
+<span class="n">cd</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">shiny</span><span class="o">-</span><span class="n">server</span>
+<span class="c1">#sudo chown -R craig:shiny-apps .</span>
+<span class="c1">#sudo chown -R shiny:shiny-apps .</span>
+
+<span class="n">sudo</span> <span class="n">chmod</span> <span class="n">g</span><span class="o">+</span><span class="n">w</span> <span class="o">.</span>
+<span class="n">sudo</span> <span class="n">chmod</span> <span class="n">g</span><span class="o">+</span><span class="n">s</span> <span class="o">.</span>
+
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">git</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;craig@sntech.co.uk&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Craig Syms&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;craig@sntech.co.uk&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;SNTech&quot;</span>
+
+<span class="n">cd</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">shiny</span><span class="o">-</span><span class="n">server</span>
+<span class="n">git</span> <span class="n">init</span>
+
+<span class="c1"># This initalizes everything and should add the Shiny test Apps to the sntech git</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sntech</span><span class="o">-</span><span class="n">analytics</span><span class="o">/</span><span class="n">shiny</span><span class="o">-</span><span class="n">server</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Initial commit&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="n">master</span>
+
+<span class="c1">#When prompted for username...</span>
+<span class="n">sntech</span><span class="o">-</span><span class="n">analytics</span>
+<span class="n">sntechgitpassword</span>
+
+</pre></div>
+</div>
+<p>Shiny Apps are written by myself and committed to github. When I want to upload/update the apps to the server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">craig</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
+<span class="n">craigspassword</span>
+
+<span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+</div>
+<p>That completes the setup of R, Shiny, and the github link.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ionosserver"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../landing-page.html" title="previous page">SafetyNet Technologies data analytics manifesto</a>
+    <a class='right-next' id="next-link" href="../power/trialpower.html" title="next page">How many trawls do we need to sample to make sure we can detect a biologically important effect?</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Craig Syms<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
