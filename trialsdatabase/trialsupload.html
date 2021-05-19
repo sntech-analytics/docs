@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pisces trial data pre-processing and database upload &#8212; SafetyNet Tech data analytics manual</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How many trawls do we need to sample to make sure we can detect a biologically important effect?" href="../power/trialpower.html" />
+    <link rel="prev" title="Pisces trial data pre-processing and database upload" href="trialsprocessing.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/safetynet_logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">SafetyNet Tech data analytics manual</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landing-page.html">
+   SafetyNet Technologies data analytics manifesto
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Ionos VPS server
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ionosserver/ionosserversetup.html">
+   Ionos server setup
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Pisces trial database
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialsprocessing.html">
+   Pisces trial data pre-processing and database upload
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Pisces trial data pre-processing and database upload
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Trial design and statistical power
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../power/trialpower.html">
+   How many trawls do we need to sample to make sure we can detect a biologically important effect?
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/trialsdatabase/trialsupload.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#this-document-describes-the-steps-required-to-upload-the-pisces-trial-data-to-mariadb">
+   This document describes the steps required to upload the Pisces trial data to MariaDB
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pisces-trial-database-structure">
+   Pisces trial database structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transferring-data-to-the-server">
+   Transferring data to the server
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-alternative">
+   An alternative…
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="pisces-trial-data-pre-processing-and-database-upload">
+<h1>Pisces trial data pre-processing and database upload<a class="headerlink" href="#pisces-trial-data-pre-processing-and-database-upload" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="this-document-describes-the-steps-required-to-upload-the-pisces-trial-data-to-mariadb">
+<h2>This document describes the steps required to upload the Pisces trial data to MariaDB<a class="headerlink" href="#this-document-describes-the-steps-required-to-upload-the-pisces-trial-data-to-mariadb" title="Permalink to this headline">¶</a></h2>
+<p>In the preceding step we screened and pre-processed the raw data for upload. Here, we actually add records to the database. A line-by-line form is of no use - we have to bulk upload records. But first, we need to actually make a database to upload to.</p>
+</div>
+<div class="section" id="pisces-trial-database-structure">
+<h2>Pisces trial database structure<a class="headerlink" href="#pisces-trial-database-structure" title="Permalink to this headline">¶</a></h2>
+<p>To generate the database from scratch, we use SQL rather than any sort of graphical interface. It is easier to spot mistakes, and if we screw something up it’s easier at this early stage to simply re-run everything and start again. First we need to log in via a terminal to the server and start MariaDB. The user of course needs to have write permissions. These were established when I set up MariaDB in the server chapter.<br />
+<strong>Note</strong>:</p>
+<ul class="simple">
+<li><p>We use the -p option to prompt for a password. It’s the only way to get in</p></li>
+<li><p>SQL statements are finished with a semicolon</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">craig</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
+<span class="o">&gt;</span><span class="n">craigspassword</span>
+
+<span class="n">mariadb</span> <span class="o">-</span><span class="n">p</span>
+<span class="n">Enter</span> <span class="n">password</span><span class="p">:</span> <span class="n">craigspassword</span>
+</pre></div>
+</div>
+<p>This brings up the MariaDB prompt. The approach I take is to have the SQL code in a text file, and copy-paste segments into the terminal step by step. Be careful is you are using a Windows text editor because it may use stupid Windows-specific characters for line or carriage returns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">IF</span> <span class="n">NOT</span> <span class="n">EXISTS</span> <span class="n">piscestrial</span><span class="p">;</span>
+
+<span class="n">SHOW</span> <span class="n">DATABASES</span><span class="p">;</span>
+
+<span class="n">USE</span> <span class="n">piscestrial</span><span class="p">;</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">trialID</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
+    <span class="n">Project</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Asset</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">StartDateDT</span> <span class="n">date</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">StartDate</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">EndDate</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Location</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Activity</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Gear</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>    
+    <span class="n">GearType</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+    <span class="n">GearNo</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">Bait</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">GearInfo</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>    
+    <span class="n">LatitudeCatchApp</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>    
+    <span class="n">LongitudeCatchApp</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>  
+    <span class="n">SoakTowTime</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">Position</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Light</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Colour</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Flash</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Intensity</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span>
+    <span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">catchData</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">CountID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
+    <span class="n">Species</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">ReturnedWeight</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">ReturnedNumber</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">RetainedWeight</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">RetainedNumber</span> <span class="n">INT</span>
+    <span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">trackData</span><span class="p">(</span>
+    <span class="n">Date</span> <span class="n">datetime</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Latitude</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>    
+    <span class="n">Longitude</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> 
+    <span class="n">SpeedMPH</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">SpeedKPH</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">AltFeet</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">Altmeter</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">Accuracy</span> <span class="n">INT</span><span class="p">,</span>
+    <span class="n">Type</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">DateString</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>        
+    <span class="n">Asset</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">trackID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="n">PRIMARY</span> <span class="n">KEY</span>
+    <span class="p">);</span>
+
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">effortData</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
+    <span class="n">Asset</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">StartDate</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">StartDateDT</span> <span class="n">date</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Activity</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">TrawlStartTime</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">TrawlEndTime</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">TrawlStartLat</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>    
+    <span class="n">TrawlStartLon</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> 
+    <span class="n">TrawlEndLat</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>    
+    <span class="n">TrawlEndLon</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> 
+    <span class="n">TowTimeMinutes</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> 
+    <span class="n">TowTimeHours</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+    <span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">ElAnneEffortData</span><span class="p">(</span>
+    <span class="n">EffortIDEilidhAnne</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Asset</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">StartDate</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">StartDateDT</span> <span class="n">date</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">TrawlDayStart</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">TrawlDayEnd</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">TrawlDayStartLat</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>    
+    <span class="n">TrawlDayStartLon</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> 
+    <span class="n">TrawlDayEndLat</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span>    
+    <span class="n">TrawlDayEndLon</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> 
+    <span class="n">TowTimeMinutes</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> 
+    <span class="n">TowTimeHours</span> <span class="n">decimal</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+    <span class="p">);</span>
+    
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">fishLengthData</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Species</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Length</span> <span class="n">INT</span> <span class="n">NOT</span> <span class="n">NULL</span>
+    <span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">sampleWeightData</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">WeightSpecies</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">Weight</span> <span class="n">INT</span> <span class="n">NOT</span> <span class="n">NULL</span>
+    <span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">bulkData</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
+    <span class="n">Bulk</span> <span class="n">INT</span> <span class="n">NOT</span> <span class="n">NULL</span>
+    <span class="p">);</span>
+
+<span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">deckPhotoFile</span><span class="p">(</span>
+    <span class="n">SampleID</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">PRIMARY</span> <span class="n">KEY</span><span class="p">,</span>
+    <span class="n">PhotoFilename</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span><span class="p">,</span>
+    <span class="n">PhotoSubject</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="n">NOT</span> <span class="n">NULL</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+<p>So far so good. MariaDB has generated a database schema and structure, and set up directories for where the tables will live. Don’t be tempted to manually alter or define these. MariaDB will manage (effectively) unlimited numbers of databases, but it needs to keep track of everything internally. It is best to let it do its own organising.<br />
+Of course we only need to make the database once. Oce it’s there, we need to populate it with data.</p>
+</div>
+<div class="section" id="transferring-data-to-the-server">
+<h2>Transferring data to the server<a class="headerlink" href="#transferring-data-to-the-server" title="Permalink to this headline">¶</a></h2>
+<p>To get data to the server I use Filezilla, which is a graphical FTP interface. The database files live in:<br />
+/home/sntech/PiscesTrialDatabase<br />
+Within this directory there is a Data folder, which holds the csv files for upload, and folders for both the original and the renamed versions of the photos. Needless to say, you will need write permissions for this directory.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>I can’t stress how important it is to be careful when moving files to and from the server - particularly when you have extended write permissions. A lot of damage can be done within a very short period of time on a unix server!</p>
+</div>
+</div>
+<p>Now the files are on the server, we can again use some SQL code to upload them to the database. The exact code will depend on which tables you are uploading to. Also, in the example below I’ve just specified some generic file names.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Deep breath…</p>
+</div>
+<p>Assuming we have just ssh’ed into the server, we need to start MariaDB first.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mariadb</span> <span class="o">-</span><span class="n">p</span>
+<span class="n">Enter</span> <span class="n">password</span><span class="p">:</span> <span class="n">craigspassword</span>
+
+<span class="n">SET</span> <span class="n">GLOBAL</span> <span class="n">local_infile</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="n">USE</span> <span class="n">piscestrial</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/trialIDProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">trialID</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/catchDataProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">catchData</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/csyms/Documents/SafetyNetTech/MariaDBases/CatchApp/trackDataProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">trackData</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/effortDataProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">effortData</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/fishLengthDataProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">fishLengthData</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/sampleWeightDataProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">sampleWeightData</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/bulkDataProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">bulkData</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+
+<span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="n">INFILE</span> <span class="s1">&#39;/home/sntech/PiscesTrialDatabase/Data/deckPhotoFileProcessed.csv&#39;</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">TABLE</span> <span class="n">deckPhotoFile</span> 
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;,&#39;</span> 
+<span class="n">ENCLOSED</span> <span class="n">BY</span> <span class="s1">&#39;&quot;&#39;</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="n">BY</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="n">IGNORE</span> <span class="mi">1</span> <span class="n">ROWS</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>A few explanatory notes…</p>
+<ul class="simple">
+<li><p>The SET GLOBAL local_infile=1; statement is required because by default MySQL 8.0 doesn’t allow infile upload. This is a security thing.</p></li>
+<li><p>LOAD DATA LOCAL enables the local filesystem to be read. If you drop the LOCAL option, you will receive a relatively uninformative message about permissions and tear your hair out trying to figure what’s wrong.</p></li>
+<li><p>IGNORE INTO TABLE is a rather odd syntax, but this prevents upload of duplicates. Each entry in the processed file has either a primary key (unique) value, or a combination of values that will be unique to a given sample. IGNORE INTO scans for and will not upload duplicates on the INFILE. This prevents you adding two lines for the same data point</p></li>
+<li><p>IGNORE 1 ROWS drops the header from the CSV.</p></li>
+<li><p>For Eilidh Anne there is separate effort table, because we can only identify daily effort, not hours per haul.</p></li>
+</ul>
+<p>If all has gone according to plan, everything is in the database. You can check individual tables by (for example):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">trialID</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Or if you want to do a visual check, see the next step.</p>
+</div>
+<div class="section" id="an-alternative">
+<h2>An alternative…<a class="headerlink" href="#an-alternative" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to use a GUI interface to upload data. This is occasionally useful if you have to upload from a local file, however I prefer to keep the master file(s) saved on the server so things can be reconstructed <em>de novo</em> if required.<br />
+The recommended GUI is phpMyAdmin.</p>
+<div class="figure align-default">
+<img alt="../_images/PhpMyAdminScreenshot2.png" src="../_images/PhpMyAdminScreenshot2.png" />
+</div>
+<p>Generally I use phpMyAdmin just as a visual check that nothing stupid has crept in.</p>
+<p>That completes the Pisces Trial database read-in procedure.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./trialsdatabase"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="trialsprocessing.html" title="previous page">Pisces trial data pre-processing and database upload</a>
+    <a class='right-next' id="next-link" href="../power/trialpower.html" title="next page">How many trawls do we need to sample to make sure we can detect a biologically important effect?</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Craig Syms<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

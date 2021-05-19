@@ -54,7 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How many trawls do we need to sample to make sure we can detect a biologically important effect?" href="../power/trialpower.html" />
+    <link rel="next" title="Pisces trial data pre-processing and database upload" href="../trialsdatabase/trialsprocessing.html" />
     <link rel="prev" title="SafetyNet Technologies data analytics manifesto" href="../landing-page.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -101,6 +101,23 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Ionos server setup
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Pisces trial database
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsdatabase/trialsprocessing.html">
+   Pisces trial data pre-processing and database upload
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsdatabase/trialsupload.html">
+   Pisces trial data pre-processing and database upload
   </a>
  </li>
 </ul>
@@ -166,22 +183,6 @@
 
             <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://csyms-ecol.github.io/sntechdata"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://csyms-ecol.github.io/sntechdata/issues/new?title=Issue%20on%20page%20%2Fionosserver/ionosserversetup.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
 
             <!-- Full screen (wrap in <a> to have style consistency -->
             <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
@@ -230,6 +231,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#shiny-app-maintenance">
    Shiny App maintenance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grafana">
+   Grafana
   </a>
  </li>
 </ul>
@@ -282,7 +288,6 @@ Now you can access the Plesk desktop by pointing the browser to:<br />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">root</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
 
 <span class="o">&gt;</span><span class="n">Password</span><span class="p">:</span> <span class="n">XXXXXXXXXX</span> 
-
 </pre></div>
 </div>
 <p>Now we add users. I’ve added myself, and a sntech user with root privileges. Note the <strong>usermod -aG sudo</strong> grants the user sudo privileges:</p>
@@ -293,12 +298,10 @@ Now you can access the Plesk desktop by pointing the browser to:<br />
 <span class="n">adduser</span> <span class="n">sntech</span>
 <span class="o">&gt;</span><span class="n">sntechspassword</span>
 <span class="n">usermod</span> <span class="o">-</span><span class="n">aG</span> <span class="n">sudo</span> <span class="n">sntech</span>
-
 </pre></div>
 </div>
 <p>Once we are done here, log out as root and back in as your username. The command is <strong>su</strong> or switch user:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">su</span> <span class="n">craig</span>
-
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -310,11 +313,13 @@ Now you can access the Plesk desktop by pointing the browser to:<br />
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
 <p>Python 3.8.5 is already installed (as is 2.7.18), but pip3 isn’t. I use pip3 instead of anaconda to maintain Python packages. That’s just personal preference, because I’ve had bad experiences with Anaconda.<br />
 Update the system, and install pip and some other libraries that are useful:</p>
-<p>sudo apt-get update<br />
-sudo apt install python3-pip<br />
-sudo apt install -y build-essential libssl-dev libffi-dev python3-dev<br />
-sudo apt install debian-keyring g++-multilib g++-9-multilib gcc-9-doc bzr libstdc++-9-doc<br />
-sudo apt install -y python3-venv</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>  
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>  
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libffi</span><span class="o">-</span><span class="n">dev</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span>  
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">debian</span><span class="o">-</span><span class="n">keyring</span> <span class="n">g</span><span class="o">++-</span><span class="n">multilib</span> <span class="n">g</span><span class="o">++-</span><span class="mi">9</span><span class="o">-</span><span class="n">multilib</span> <span class="n">gcc</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="n">doc</span> <span class="n">bzr</span> <span class="n">libstdc</span><span class="o">++-</span><span class="mi">9</span><span class="o">-</span><span class="n">doc</span>  
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">python3</span><span class="o">-</span><span class="n">venv</span> 
+</pre></div>
+</div>
 </div>
 <div class="section" id="mariadb-mysql">
 <h2>MariaDB/MySQL<a class="headerlink" href="#mariadb-mysql" title="Permalink to this headline">¶</a></h2>
@@ -322,7 +327,6 @@ sudo apt install -y python3-venv</p>
 MariaDB ships with Ubuntu 20.04, so there is no need to install it. However, on a new installation, MariaDB is completely open with no security, so we need to correct this.<br />
 Run this to secure it:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mysql_secure_installation</span>
-
 </pre></div>
 </div>
 <p>There is no initial root password, so press &lt;enter&gt;.
@@ -352,7 +356,6 @@ You will be prompted to set the root password. <strong>Note:</strong> This shoul
 
 <span class="c1"># Check the admin password authentication</span>
 <span class="n">mysqladmin</span> <span class="o">-</span><span class="n">u</span> <span class="n">admin</span> <span class="o">-</span><span class="n">p</span> <span class="n">version</span>
-
 </pre></div>
 </div>
 <p>This completes the MariaDB installation process</p>
@@ -441,7 +444,6 @@ You should see the <em>hello world</em> version of a Shiny program. Remember, th
 <span class="c1">#When prompted for username...</span>
 <span class="n">sntech</span><span class="o">-</span><span class="n">analytics</span>
 <span class="n">sntechgitpassword</span>
-
 </pre></div>
 </div>
 <p>Shiny Apps are written by myself and committed to github. When I want to upload/update the apps to the server:</p>
@@ -451,7 +453,54 @@ You should see the <em>hello world</em> version of a Shiny program. Remember, th
 <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
 </pre></div>
 </div>
-<p>That completes the setup of R, Shiny, and the github link.</p>
+</div>
+<div class="section" id="grafana">
+<h2>Grafana<a class="headerlink" href="#grafana" title="Permalink to this headline">¶</a></h2>
+<p>I couldn’t get Grafana working properly on the server. It was set up OK, but on starting it was not listening on any port. There are a whole swag of options in the Grafana config file, so I thought ‘screw it’ and took another approach.<br />
+Grafana is now being run via the Ubuntu docker image. This actually has a few benefits. Grafana’s default security is not great, and a Docker image separates it from the rest of the file system. These are the steps to set up Docker &amp; Grafana (notes at <a class="reference external" href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> \
+    <span class="n">apt</span><span class="o">-</span><span class="n">transport</span><span class="o">-</span><span class="n">https</span> \
+    <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span> \
+    <span class="n">curl</span> \
+    <span class="n">gnupg</span> \
+    <span class="n">lsb</span><span class="o">-</span><span class="n">release</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">fsSL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">/</span><span class="n">gpg</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">gpg</span> <span class="o">--</span><span class="n">dearmor</span> <span class="o">-</span><span class="n">o</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">keyrings</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">archive</span><span class="o">-</span><span class="n">keyring</span><span class="o">.</span><span class="n">gpg</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#NOTE: Next 3 lines are single command
+echo \
+  &quot;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ 
+  $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</pre></div>
+</div>
+<p>To check the installation…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="n">hello</span><span class="o">-</span><span class="n">world</span>
+</pre></div>
+</div>
+<p>Now we can download and run the Grafana image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#First, set a physical storage location so you don&#39;t lose everything if the image restarts</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">volume</span> <span class="n">create</span> <span class="n">grafana</span><span class="o">-</span><span class="n">storage</span>
+<span class="c1">#Now the Docker image itself</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="mi">3000</span><span class="p">:</span><span class="mi">3000</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">grafana</span> <span class="o">-</span><span class="n">v</span> <span class="n">grafana</span><span class="o">-</span><span class="n">storage</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">grafana</span> <span class="n">grafana</span><span class="o">/</span><span class="n">grafana</span>
+<span class="c1"># Add this line so Grafana will restart if for some reason the server reboots</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">update</span> <span class="o">--</span><span class="n">restart</span> <span class="n">unless</span><span class="o">-</span><span class="n">stopped</span> <span class="n">grafana</span>
+</pre></div>
+</div>
+<p>The default setup has the username <em>admin</em> with password <em>admin</em>. On a new installation, needless to say the first thing to do is change that.</p>
+<p>Grafana can now be accessed by pointing the browser to:<br />
+<a class="reference external" href="http://77.68.125.129:3000/">http://77.68.125.129:3000/</a><br />
+Note this is not a https port. There are some other useful admin tools to keep in the toolbox.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Find names of containers to stop</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">container</span> <span class="n">ls</span> <span class="o">-</span><span class="n">a</span>
+<span class="c1">#Stop a container identified by the code in the ls command</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">stop</span> <span class="n">container_id</span>
+<span class="c1">#Remove a container identified by the code in the ls command</span>
+<span class="n">sudo</span> <span class="n">docker</span> <span class="n">rm</span> <span class="n">container_id</span>
+</pre></div>
+</div>
+<p>That completes the setup of R, Shiny, the github link to Shiny, Docker and Grafana.</p>
 </div>
 </div>
 
@@ -481,7 +530,7 @@ You should see the <em>hello world</em> version of a Shiny program. Remember, th
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../landing-page.html" title="previous page">SafetyNet Technologies data analytics manifesto</a>
-    <a class='right-next' id="next-link" href="../power/trialpower.html" title="next page">How many trawls do we need to sample to make sure we can detect a biologically important effect?</a>
+    <a class='right-next' id="next-link" href="../trialsdatabase/trialsprocessing.html" title="next page">Pisces trial data pre-processing and database upload</a>
 
         </div>
         
@@ -493,7 +542,7 @@ You should see the <em>hello world</em> version of a Shiny program. Remember, th
         
           By Craig Syms<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2021.<br/>
       </p>
     </div>
   </footer>

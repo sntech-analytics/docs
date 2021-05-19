@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pisces trial data pre-processing and database upload &#8212; SafetyNet Tech data analytics manual</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pisces trial data pre-processing and database upload" href="trialsupload.html" />
+    <link rel="prev" title="Ionos server setup" href="../ionosserver/ionosserversetup.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/safetynet_logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">SafetyNet Tech data analytics manual</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landing-page.html">
+   SafetyNet Technologies data analytics manifesto
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Ionos VPS server
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ionosserver/ionosserversetup.html">
+   Ionos server setup
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Pisces trial database
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Pisces trial data pre-processing and database upload
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialsupload.html">
+   Pisces trial data pre-processing and database upload
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Trial design and statistical power
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../power/trialpower.html">
+   How many trawls do we need to sample to make sure we can detect a biologically important effect?
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/trialsdatabase/trialsprocessing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#this-document-describes-the-steps-required-to-pre-process-the-pisces-trial-data-for-upload">
+   This document describes the steps required to pre-process the Pisces trial data for upload
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-and-splitting-the-catchapp-data">
+   Reading and splitting the CatchApp data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-the-track-data-from-followmee">
+   Reading the track data from Followmee
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reading-the-manually-entered-effort-data">
+   Reading the manually entered Effort data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#renaming-and-loading-the-image-filenames">
+   Renaming and loading the image filenames
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="pisces-trial-data-pre-processing-and-database-upload">
+<h1>Pisces trial data pre-processing and database upload<a class="headerlink" href="#pisces-trial-data-pre-processing-and-database-upload" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="this-document-describes-the-steps-required-to-pre-process-the-pisces-trial-data-for-upload">
+<h2>This document describes the steps required to pre-process the Pisces trial data for upload<a class="headerlink" href="#this-document-describes-the-steps-required-to-pre-process-the-pisces-trial-data-for-upload" title="Permalink to this headline">¶</a></h2>
+<p>The ongoing Pisces trials for both M&amp;S and Tesco projects use the same methodology, so it makes sense to store the data in the same database. Each cruise however has multiple data sources, and these need to be screened, processed, and standardized into a form that enables the data to be uploaded to a database for storage and to enable as painless an import procedure into an analysis program. In an ideal world, we would have machine-collected data that can be simply sucked into a data table as-is. In the real world, Sod’s law prevails so we have to do quite a bit of wrangling to get the data into the right format.</p>
+<p>There are four different sources of data:</p>
+<ol class="simple">
+<li><p><strong>CatchApp</strong>. Each vessel has CatchApp on an iPad, and this is our primary record of which tows were carried out on any given day. The CatchApp data are downloaded from <a class="reference external" href="http://www.succorfish.net">www.succorfish.net</a>. Some of the fields require manual entry of character field values, so unfortunately we have to screen these during pre-processing. But in general CatchApp is a great tool and vast improvement over handwritten sheets. CatchApp is split into two tables:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Vessel, date, Pisces status. This forms the basis of our core identifier table</p></li>
+<li><p>Catch species and retained/discarded weights. This forms the catch table</p></li>
+</ul>
+<ol class="simple">
+<li><p><strong>Followmee</strong>. This is another great tool, and is a GPS tracker on the iPad. It pings approximately every 2-10 minutes, and from Followmee we get the start and end of each haul.</p></li>
+</ol>
+<ul class="simple">
+<li><p>The track data is uploaded with only a few additions directly to the database. It has a date-time stamp, so is readily queryable.</p></li>
+</ul>
+<ol class="simple">
+<li><p><strong>Effort</strong>. CatchApp provides a field for haul duration, but the estimate is not particularly reliable. Consequently, I record the gear-in/gear-out time and position manually by going through the tracks day by day, and work out from the vessel speed and course whether they are towing or not. Eventually I can train a model to predict this. It wouldn’t be hard. When the vessel slows to ~ 3 kts it is towing. This is easier to do for the larger vessels. In the case of <em>Eilidh Anne</em> we can’t tell whether she is fishing or not. At best we can see the start of the first haul of the day, and the end of the last haul.</p></li>
+<li><p><strong>Deck photos</strong>. These will hopefully form the basis of a hopper catch calibration. Currently the skipper sends a photo of the catch to the project phone via WhatsApp. Unfortunately this does not contain the EXIF (image information) of when the photo was actually taken. Additionally, the photo filename is not consistent and changes with different downloads due to iOS nonsense. To deal with this, a copy of the photo is renamed to a format that identifies where and when the image was taken. The image is stored in a data directory, and the filename entered into a database table. This enables retrieval of the photo using the sample identification variable. Note: Photos are typically taken of the hopper, but sometimes additional photos of the catch sample are taken. This is taken care of in the file renaming step.  Of all the processes, this is probably the most manually intensive and error-prone. I have automated it as much as possible.</p></li>
+<li><p><strong>Catch subsample bulk and fish length</strong>. These data are collected only when there is an observer on board. A subsample of the catch (one bucket) is collected, and different elements of the catch weighed and the fishes are measured (total length rounded down to the nearest centimeter, except for skates which are measured tip to tip). Currently these data are entered in a Google Sheet. The format itself is not conducive for direct read-in to the database. However, its current form is tractable for the person on the boat entering it, so it is quicker to leave that system in place and modify it later. The sequence is:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Restructure a copy of the data into individual columns (one per variable)</p></li>
+<li><p>Read the individual sheets corresponding to an individual haul into R, making sure the haul sample identifiers are correctly specified</p></li>
+<li><p>Split into fish length and sample weight database tables</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sometimes we need to modify the database structure to accommodate idiosyncrasies in the data. For example, Eilidh Anne effort measurements are <em>per day</em>, with a fudge factor for net retrieval and re-deployment. This requires a separate database table. It is what it is…</p>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The hard code samples (well, as much as they can be hard given I have to continually modify them) are written in Jupyter notebooks. As things settle in and I cover the range of idiosyncrasies, I will formalise these a bit more into a closed repository on Github.</p>
+</div>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As we add vessels protocols may change.For example, in the first Golden Ray trial a paired design was tested. This requires a change to the trialID table. RDBMS are structured, but we can add a degree of flexibility where required.</p>
+</div>
+</div>
+<p>The pre-processing steps take the five data sources and screen, standardize, and restructure to give eight csv files. These files are then read directly into the database using the generic sql statement</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LOAD</span> <span class="n">DATA</span> <span class="n">INFILE</span> <span class="n">csv</span> 
+<span class="n">IGNORE</span> <span class="n">INTO</span> <span class="n">tablename</span>
+</pre></div>
+</div>
+<p>There will be more of that later in the next section.<br />
+This gives us the following schema (links are omitted for clarity, and because not all tables have primary keys):</p>
+<div class="figure align-default">
+<img alt="../_images/PiscesTrialDatabaseSchema.png" src="../_images/PiscesTrialDatabaseSchema.png" />
+</div>
+</div>
+<div class="section" id="reading-and-splitting-the-catchapp-data">
+<h2>Reading and splitting the CatchApp data<a class="headerlink" href="#reading-and-splitting-the-catchapp-data" title="Permalink to this headline">¶</a></h2>
+<p>Each vessel has its own Jupyter Notebook in which I have to accumulate and deal with vesel-specific idiosyncrasies. What follows is a broad-brush treatment of the steps required.</p>
+<p>First step is to read in the raw CatchApp file and deal with specific issues like specifying which project the data should be assigned to, make a primary key sampleID, add a variable in (Year, Month, Day) format that MySQL can read as a date variable, tidu up some variable names, and synonymise any typos.<br />
+To give you some idea of what’s involved, this is the code from Virtuous after the first trip (click to show the code):</p>
+<p>{
+“tags”: [
+“hide_input”,
+]
+}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>infile &lt;- &#39;./Data/VIRTUOUS-FR253-.csv&#39;
+df &lt;- read.csv(infile, stringsAsFactors=F)
+
+#Rename variables for consistency
+
+df$Project &lt;- &#39;M&amp;S&#39; 
+df$Bait &lt;- trimws(df$Bait)
+df$Bait[df$Bait == &#39;No lights&#39;] &lt;- &#39;No light&#39;
+df$Bait[df$Bait == &#39;White light constant bright&#39;] &lt;- &#39;White, constant, bright&#39;
+df$Bait[df$Bait == &#39;White on bright smp&#39;] &lt;- &#39;White, constant, bright&#39;
+
+df$Position &lt;- &#39;SMP&#39;
+df$Activity &lt;- gsub(&#39; &#39;, &#39;&#39;, df$Activity)
+df$Asset[df$Asset == &#39;VIRTUOUS FR253&#39;] &lt;- &#39;Virtuous&#39;
+
+
+#Generate sample PK
+df$SampleID &lt;- paste(df$Asset, df$Start.Date, df$Activity, sep=&#39;_&#39;)
+
+#Don&#39;t generate Date values for MYSQL
+#df$Date_Start &lt;- as.Date(df$Start.Date, format = &quot;%d/%m/%Y&quot;)
+#df$Date_End &lt;- as.Date(df$End.Date, format = &quot;%d/%m/%Y&quot;)
+
+#Generate Lat-Longs
+df &lt;- cbind(df, strcapture(&quot;(.*),(.*)&quot;, as.character(df$Location), data.frame(Latitude = &quot;&quot;, Longitude = &quot;&quot;)))
+df$Latitude &lt;- as.numeric(df$Latitude)
+df$Longitude &lt;- as.numeric(df$Longitude)
+
+df$Soak.tow.time &lt;- df$Soak...tow.time 
+df$Soak...tow.time &lt;- NULL
+
+df$Retained.Weight &lt;- df$Retained.weight 
+df$Retained.weight &lt;- NULL
+
+df$Returned.Reason &lt;- df$Returned.reason 
+df$Returned.reason &lt;- NULL
+
+df$Retained.Number &lt;- df$Retained.No. 
+df$Retained.No. &lt;- NULL
+
+df$Gear.No &lt;- df$Gear.No. 
+df$Gear.No. &lt;- NULL
+
+
+# MySQL reads year-month-day into dates
+df$year &lt;- substr(df$Start.Date, 7, 11)
+df$month &lt;- substr(df$Start.Date, 4, 5)
+df$day &lt;- substr(df$Start.Date, 1, 2)
+
+df$YearMonthDay &lt;- paste(df$year, df$month, df$day, sep=&#39;-&#39;)
+
+df$year &lt;- NULL
+df$month &lt;- NULL
+df$day &lt;- NULL
+
+#Parse into constituent light elements
+
+for (i in 1:nrow(df)) {
+if (df[i,&#39;Bait&#39;] == &#39;No light&#39;){
+       df[i,&#39;Light&#39;] &lt;- &#39;Off&#39;
+       df[i,&#39;Colour&#39;] &lt;- &#39;None&#39;
+       df[i,&#39;Flash&#39;] &lt;- &#39;None&#39;
+       df[i,&#39;Intensity&#39;] &lt;- &#39;None&#39;}
+
+else if (df[i,&#39;Bait&#39;] == &#39;White, constant, bright&#39;){
+       df[i,&#39;Light&#39;] &lt;- &#39;On&#39;
+       df[i,&#39;Colour&#39;] &lt;- &#39;White&#39;
+       df[i,&#39;Flash&#39;] &lt;- &#39;Constant&#39;
+       df[i,&#39;Intensity&#39;] &lt;- &#39;Bright&#39;
+    }
+    
+}
+</pre></div>
+</div>
+<p>Of course as more typos etc. accumulate, we need to constantly update the notebook to accommodate this.<br />
+But once this is done, we can easily write two of the important tables: The trialID table, and the catchData table:</p>
+<p>{
+“tags”: [
+“hide_input”,
+]
+}</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>trialID &lt;- unique(df[,c(&quot;SampleID&quot;, &quot;Project&quot;, &quot;Asset&quot;, &quot;YearMonthDay&quot;, &quot;Start.Date&quot;, &quot;End.Date&quot;, &quot;Location&quot;, &quot;Activity&quot;, 
+&quot;Gear&quot;, &quot;Gear.Type&quot;, &quot;Gear.No&quot;, &quot;Bait&quot;, &quot;Gear.info&quot;,
+&quot;Latitude&quot;, &quot;Longitude&quot;, &quot;Soak.tow.time&quot;, &quot;Position&quot;, &quot;Light&quot;, &quot;Colour&quot;, 
+&quot;Flash&quot;, &quot;Intensity&quot;)])
+trialID &lt;- trialID[order(trialID$SampleID),]
+write.csv(trialID, file=&#39;./Data/trialIDVirt1.csv&#39;, row.names=F)
+
+catchData &lt;- df[c(&quot;SampleID&quot;,&quot;Species&quot;, &quot;Returned.Weight&quot;, &quot;Returned.Number&quot;, &quot;Retained.Weight&quot;, 
+           &quot;Retained.Number&quot;)]
+
+catchData &lt;- setDF(setDT(catchData)[, lapply(.SD, sum, na.rm=TRUE),
+                    by=c(&#39;SampleID&#39;, &#39;Species&#39;), 
+                    .SDcols=c(&quot;Returned.Weight&quot;, &quot;Returned.Number&quot;, &quot;Retained.Weight&quot;,  &quot;Retained.Number&quot;)])
+
+#I need to make a primary (unique) key to avoid uploading duplicates
+
+catchData$CountID &lt;- paste(catchData$SampleID, catchData$Species, sep=&#39;_&#39;)
+catchData &lt;- catchData[c(&quot;SampleID&quot;, &quot;CountID&quot;, &quot;Species&quot;, &quot;Returned.Weight&quot;, &quot;Returned.Number&quot;, &quot;Retained.Weight&quot;,  &quot;Retained.Number&quot;)] 
+write.csv(catchData, file=&#39;./Data/catchDataVirt1.csv&#39;, row.names=F)
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-the-track-data-from-followmee">
+<h2>Reading the track data from Followmee<a class="headerlink" href="#reading-the-track-data-from-followmee" title="Permalink to this headline">¶</a></h2>
+<p>This is probably the least painful component. All I need to do is read the saved csv from Followmee, and add some identifiers to the data set. Note in the case of Virtuous, I had to delete the section of Tom’s car trip from Hull to Whitby.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#Change directory/filename as required
+track &lt;- read.csv(&#39;./Data/VirtuoustrackLastRecord.csv&#39;, stringsAsFactors=F)
+track$ID &lt;- &quot;Virtuous&quot;
+track$keyID &lt;- paste0(track$ID, track$Date)
+
+# Delete the first part
+track$DTime &lt;- as_datetime(track$Date)
+track &lt;- subset(track, DTime &gt; as_datetime(&#39;2021-04-13 04:00:00 PM&#39;))
+track$DTime &lt;- NULL
+write.csv(track, file=&#39;./Data/trackDataVirt1.csv&#39;,
+          na = &quot;&quot;,
+          row.names=F)
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-the-manually-entered-effort-data">
+<h2>Reading the manually entered Effort data<a class="headerlink" href="#reading-the-manually-entered-effort-data" title="Permalink to this headline">¶</a></h2>
+<p>At present I can’t reliably identify trawl start and stop from Followmee. So, I manually examine the track and cop-paste the position and time from what I can see is the beginning end of the trawl. This is entered in a CSV file, and read in a written to another database table. Note I measure the trawl duration in both hours and minutes, although we will use hours for the CPUE correction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>df &lt;- read.csv(&#39;./Data/VirtuousEffort1.csv&#39;, stringsAsFactors=F)
+df$SampleID &lt;- paste(df$Asset, as.character(format(dmy(df$StartDate), &quot;%d/%m/%Y&quot;)), df$Activity, sep=&#39;_&#39;)
+df$TowTimeMinutes &lt;- difftime(ymd_hms(df$TrawlEndTime), ymd_hms(df$TrawlStartTime), units=&quot;mins&quot;)
+df$TowTimeHours &lt;- difftime(ymd_hms(df$TrawlEndTime), ymd_hms(df$TrawlStartTime), units=&quot;hours&quot;)
+
+df$tempdat &lt;- as.character(format(dmy(df$StartDate), &quot;%d/%m/%Y&quot;))
+df$tempdat
+
+# MySQL reads year-month-day into dates
+df$year &lt;- substr(df$tempdat, 7, 10)
+df$month &lt;- substr(df$tempdat, 4, 5)
+df$day &lt;- substr(df$tempdat, 1, 2)
+
+df$YearMonthDay &lt;- paste(df$year, df$month, df$day, sep=&#39;-&#39;)
+
+df$year &lt;- NULL
+df$month &lt;- NULL
+df$day &lt;- NULL
+df$tempdat &lt;- NULL
+</pre></div>
+</div>
+<p>For Virtuous and Golden Ray this value directly corresponds with the trialID key variable. Ideally we would need only the one effort table. However… we can’t do this for Eilidh Anne because we only have the beginning and start of the day - not the haul. So for Eilidh Anne we have a separate table.</p>
+</div>
+<div class="section" id="renaming-and-loading-the-image-filenames">
+<h2>Renaming and loading the image filenames<a class="headerlink" href="#renaming-and-loading-the-image-filenames" title="Permalink to this headline">¶</a></h2>
+<p>This step is definitely one that you need to keep on top of. Typically there will be four hauls per day, so the number of photos quickly stacks up. Manually renaming the images is not a viable option. There is too much potential for silly typo errors.<br />
+The approach I use is to read the unique SampleID variable from the trialID table, and directly parse the identifier into the filename. To do this, we need the images to be renamed to be in a separate directory. I get a listing of the filenames, then go through the WhatsApp messages to make sure the images are correctly lined with the SampleID variables.<br />
+For the most part these are photos of the hopper. In some cases they are elsewhere (eg. the sample), so I need to add an identifier into the filename.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to store the image itself i a MySQL database as a BLOB (Binary Large Object) entry. However nobody in database land recommends it, so I simply save the filename in the database table to allow retrieval of the correct photo.</p>
+</div>
+<p>The simplified coding looks a bit like this…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>frompath &lt;- &#39;./2021_04_VirtuousPhotos/&#39;
+topath &lt;- &#39;./2021_04_VirtuousPhotosRenamed/&#39;
+list.files(&#39;frompath&#39;)
+trialID &lt;- trialID$SampleID
+
+inittable &lt;- data.frame(SampleID=character(0), SampleImageFile=character(0))
+inittable$SampleID &lt;- as.character(inittable$SampleID)
+inittable$SampleImageFile &lt;- as.character(inittable$SampleImageFile)
+
+rename &lt;- function(FROM, OF, IDNUM){
+    file1 &lt;- paste0(frompath, FROM)
+    id1 &lt;- trialID[IDNUM, &#39;SampleID&#39;]
+    file2 &lt;- paste(id1, OF, sep=&#39;_&#39;)
+    file2 &lt;- paste(file2, &#39;JPG&#39;, sep=&#39;.&#39;)
+    file2 &lt;- gsub(&quot;[[:space:]]&quot;, &quot;_&quot;, file2)
+    file2 &lt;- gsub(&quot;/&quot;, &quot;_&quot;, file2)
+    file2 &lt;- paste0(topath, file2)
+    !file.copy(from=file1, to=file2)
+}
+
+rename(&#39;IMG_0009.JPG&#39;, &#39;Hopper&#39;, 2)
+# Do this for all the image files in the list
+
+# Now write the new image names to a csv to be imported to the database
+filelist &lt;- data.frame(list.files(&#39;./2021_04_VirtuousPhotosRenamed/&#39;))
+names(filelist) &lt;- &#39;file&#39;
+filelist$SampleID &lt;- substr(filelist$file, 1, 25)
+filelist$SampleID &lt;- gsub(&quot;_&quot;, &quot;/&quot;, filelist$SampleID)
+filelist$SampleID &lt;- gsub(&quot;s/&quot;, &quot;s_&quot;, filelist$SampleID)
+filelist$SampleID &lt;- gsub(&quot;/H&quot;, &quot;_H&quot;, filelist$SampleID)
+
+filelist$PhotoLocation &lt;- substr(filelist$file, 27, 32)
+
+filelist &lt;- filelist[c(&#39;SampleID&#39;, &#39;file&#39;, &#39;PhotoLocation&#39;)]
+filelist
+write.csv(filelist, file=&#39;./Data/deckPhotoFileVirt1.csv&#39;,
+         row.names=F)
+</pre></div>
+</div>
+<p>Pretty ugly, huh?</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./trialsdatabase"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ionosserver/ionosserversetup.html" title="previous page">Ionos server setup</a>
+    <a class='right-next' id="next-link" href="trialsupload.html" title="next page">Pisces trial data pre-processing and database upload</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Craig Syms<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
