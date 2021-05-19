@@ -54,7 +54,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Pisces trial data pre-processing and database upload" href="../trialsdatabase/trialsprocessing.html" />
+    <link rel="next" title="Pisces trial data pre-processing" href="../trialsdatabase/trialsprocessing.html" />
     <link rel="prev" title="SafetyNet Technologies data analytics manifesto" href="../landing-page.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -112,12 +112,12 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../trialsdatabase/trialsprocessing.html">
-   Pisces trial data pre-processing and database upload
+   Pisces trial data pre-processing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../trialsdatabase/trialsupload.html">
-   Pisces trial data pre-processing and database upload
+   Pisces trial database upload
   </a>
  </li>
 </ul>
@@ -332,14 +332,14 @@ Run this to secure it:</p>
 <p>There is no initial root password, so press &lt;enter&gt;.
 You will be prompted to set the root password. <strong>Note:</strong> This should not be the same as any other password. The database password is not the same as a user password. They are separate entities.</p>
 <p>You will be prompted with a series of questions. Select Y for each question. This will remove the insecure initial options. Now quit mariadb.</p>
-<p>Now we need to add regular users. First I will make an admin user with all privileges, and one for myself. Start mariadb as root:</p>
+<p>Now we need to add regular users. First I will make an admin user with all privileges, but ONLY access from within the server itself; and and one for myself but allow me to access the database remotely. This is so I can access it using ssh and phpMyAdmin. Start mariadb as root:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mariadb</span>
 <span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="s1">&#39;admin&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="s1">&#39;admindbpassword&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
 <span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
 <span class="n">exit</span>
 
 <span class="n">sudo</span> <span class="n">mariadb</span>
-<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="s1">&#39;craig&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="s1">&#39;craigdbpassword&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
+<span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">ON</span> <span class="o">*.*</span> <span class="n">TO</span> <span class="s1">&#39;craig&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="s1">&#39;craigdbpassword&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
 <span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
 <span class="n">exit</span>
 </pre></div>
@@ -411,7 +411,7 @@ You should see the <em>hello world</em> version of a Shiny program. Remember, th
 <p>I have a github account called <strong>sntech-analytics</strong>.</p>
 <p>First, we set up a github link on the server. Note the ‘.’ after the chown is deliberate. But I don’t think the statements are necessary, so I commented them out.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">craig</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
-<span class="n">craigspassword</span>
+<span class="o">&gt;</span><span class="n">craigspassword</span>
 
 <span class="n">sudo</span> <span class="n">groupadd</span> <span class="n">shiny</span><span class="o">-</span><span class="n">apps</span>
 
@@ -449,6 +449,8 @@ You should see the <em>hello world</em> version of a Shiny program. Remember, th
 <p>Shiny Apps are written by myself and committed to github. When I want to upload/update the apps to the server:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">craig</span><span class="o">@</span><span class="mf">77.68</span><span class="o">.</span><span class="mf">125.129</span>
 <span class="n">craigspassword</span>
+
+<span class="n">cd</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">shiny</span><span class="o">-</span><span class="n">server</span>
 
 <span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
 </pre></div>
@@ -530,7 +532,7 @@ Note this is not a https port. There are some other useful admin tools to keep i
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../landing-page.html" title="previous page">SafetyNet Technologies data analytics manifesto</a>
-    <a class='right-next' id="next-link" href="../trialsdatabase/trialsprocessing.html" title="next page">Pisces trial data pre-processing and database upload</a>
+    <a class='right-next' id="next-link" href="../trialsdatabase/trialsprocessing.html" title="next page">Pisces trial data pre-processing</a>
 
         </div>
         
