@@ -301,13 +301,8 @@ This gives us the following schema (links are omitted for clarity, and because n
 <div class="section" id="reading-and-splitting-the-catchapp-data">
 <h2>Reading and splitting the CatchApp data<a class="headerlink" href="#reading-and-splitting-the-catchapp-data" title="Permalink to this headline">¶</a></h2>
 <p>Each vessel has its own Jupyter Notebook in which I have to accumulate and deal with vesel-specific idiosyncrasies. What follows is a broad-brush treatment of the steps required.</p>
-<p>First step is to read in the raw CatchApp file and deal with specific issues like specifying which project the data should be assigned to, make a primary key sampleID, add a variable in (Year, Month, Day) format that MySQL can read as a date variable, tidu up some variable names, and synonymise any typos.<br />
-To give you some idea of what’s involved, this is the code from Virtuous after the first trip (click to show the code):</p>
-<p>{
-“tags”: [
-“hide_input”,
-]
-}</p>
+<p>First step is to read in the raw CatchApp file and deal with specific issues like specifying which project the data should be assigned to, make a primary key sampleID, add a variable in (Year, Month, Day) format that MySQL can read as a date variable, tidy up some variable names, and synonymise any typos.<br />
+To give you some idea of what’s involved, this is the code from Virtuous after the first trip:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>infile &lt;- &#39;./Data/VIRTUOUS-FR253-.csv&#39;
 df &lt;- read.csv(infile, stringsAsFactors=F)
 
@@ -384,11 +379,6 @@ else if (df[i,&#39;Bait&#39;] == &#39;White, constant, bright&#39;){
 </div>
 <p>Of course as more typos etc. accumulate, we need to constantly update the notebook to accommodate this.<br />
 But once this is done, we can easily write two of the important tables: The trialID table, and the catchData table:</p>
-<p>{
-“tags”: [
-“hide_input”,
-]
-}</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>trialID &lt;- unique(df[,c(&quot;SampleID&quot;, &quot;Project&quot;, &quot;Asset&quot;, &quot;YearMonthDay&quot;, &quot;Start.Date&quot;, &quot;End.Date&quot;, &quot;Location&quot;, &quot;Activity&quot;, 
 &quot;Gear&quot;, &quot;Gear.Type&quot;, &quot;Gear.No&quot;, &quot;Bait&quot;, &quot;Gear.info&quot;,
 &quot;Latitude&quot;, &quot;Longitude&quot;, &quot;Soak.tow.time&quot;, &quot;Position&quot;, &quot;Light&quot;, &quot;Colour&quot;, 
@@ -505,6 +495,7 @@ write.csv(filelist, file=&#39;./Data/deckPhotoFileVirt1.csv&#39;,
 </pre></div>
 </div>
 <p>Pretty ugly, huh?</p>
+<p>That completes the data pre-processing steps. There is still a need to streamline the process, but the protocols are still getting modified so there needs to be a certain amount of hands-on interaction with the data.</p>
 </div>
 </div>
 
