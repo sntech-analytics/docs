@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Allocating samples in space and time &#8212; SafetyNet Tech data analytics manual</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="On-board trial conduct and sampling" href="trialssampling.html" />
+    <link rel="prev" title="Pisces placement on the gear" href="trialsplacement.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/safetynet_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SafetyNet Tech data analytics manual</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landing-page.html">
+   SafetyNet Technologies data analytics manifesto
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Ionos VPS server
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ionosserver/ionosserversetup.html">
+   Ionos server setup
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Pisces trial database
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsdatabase/trialsprocessing.html">
+   Pisces trial data pre-processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsdatabase/trialsupload.html">
+   Pisces trial database upload
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Pisces trial design
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialsintro.html">
+   How do we develop Pisces trial protocols?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialsplacement.html">
+   Pisces placement on the gear
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Allocating samples in space and time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialssampling.html">
+   On-board trial conduct and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialsdataentry.html">
+   Data entry and management
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Statistical power - An initial look
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../power/trialpower.html">
+   How many trawls do we need to sample to make sure we can detect a biologically important effect?
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/trialsscience/trialsdesign.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confounding-what-it-is-and-how-to-avoid-it">
+   Confounding. What it is, and how to avoid it.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#but-wait-no-two-replicates-are-exactly-the-same">
+   But wait… no two replicates are
+   <em>
+    exactly
+   </em>
+   the same!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-general-guidelines-for-single-vs-twin-or-multi-rigs">
+   Some general guidelines for single vs twin or multi-rigs
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="allocating-samples-in-space-and-time">
+<h1>Allocating samples in space and time<a class="headerlink" href="#allocating-samples-in-space-and-time" title="Permalink to this headline">¶</a></h1>
+<p>A trial is an experiment. Our aim is to contrast what would happen in the presence of or treatment to what would happen in the absence of the treatment. From a trials perspective, the challenge is to find the gear set up that will achieve this, and the unequivocally test the light vs non-light set up. A well-designed experiment must be unambiguous. When comparing treatment to control samples, the <em>only</em> thing that must differ between them is the treatment itself.</p>
+<p>If we get it wrong at the most fundamental stage, then we are wasting time, money, goodwill, and credibility.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is tempting to consider the testing of effects such as Light/Non-light as a statistical issue. However the key is developing a setup that actually alters the environment you want to change in the way you intend it to, and to apply this change and compare to a <em>Control</em> state. This is about experimental design, not statistics. If an experimental design is critically flawed, no amount of statistics will save it.<br />
+However, sometimes our experimental design will not be perfect. As long as the core is sound, we can use statistical methods to salvage weaker problems with the implementation of the protocol.</p>
+</div>
+</div>
+<div class="section" id="confounding-what-it-is-and-how-to-avoid-it">
+<h2>Confounding. What it is, and how to avoid it.<a class="headerlink" href="#confounding-what-it-is-and-how-to-avoid-it" title="Permalink to this headline">¶</a></h2>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In its simplest form, all we are doing is comparing fish catches <strong>with</strong> <em>Pisces</em> to fish catches <strong>without</strong> <em>Pisces</em>. Herein lies the problem. We can’t re-run time on exactly the same sample unit to see what the catch would have been with, and without the light. We have to compare the light treatment to a <strong>Control</strong>. But how do we ensure that the <em>only</em> thing that differed between treatment and control was the light itself?</p>
+</div>
+</div>
+<p>Consider a trial in which we have a single vessel, towing a single net. How do we test whether there are differences between Treatment and Control?  A naive approach might be to deploy Pisces at the start, do three tows with and three tows without Pisces, and see what the difference is.</p>
+<p>What is the problem with this? Let’s think from the skipper’s point of view. He heads out to the ground, deploys the trawl for 5 hours, lifts and see what he’s got while deploying the next one. If the fishing is so-so, he probably won’t decide to change location until about the third haul, and he may be steaming toward a different ground anyway.<br />
+So… the skipper does three trawls at 3 knots for five hours each and in that time might have steamed 45 nautical miles from where he started. During that time we had the lights on (say). So, when we turn the lights off for the Control, what else has changed? We’re in a different part of the ocean. Our test of light vs Control is <em>confounded</em> with Space.</p>
+<p><strong>Confounding</strong> exists when the experimental manipulation cannot be separated from some other systematic different in the trial samples.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Hey, if it was easy <em>everyone</em> would want to do it!</p>
+</div>
+</div>
+<p>The most intuitive way to avoid this is to <em>intersperse</em> the treatments in some way. In the simple example above, we could simply alternate lights on and off. There is an additional issue to be aware of if doing this. Let’s say the vessel does 4 tows a day, and we start each day with <em>light on</em>. What problem could this cause? In this case, the light treatment would <em>always</em> be on the pre-dawn and early afternoon tows, and the control would <em>always</em> be in the midday and evening tows. This introduces <strong>temporal confounding</strong>. Whenever there is a systematic element in the sampling program, we need to make sure we avoid any periodicity that will align with the sample program.</p>
+<p>One way of safeguarding against this is to change the starting treatment for each day’s sampling program. Statistical purists might argue for a randomized start point, but as long as the starting points are interspersed across the trip, this is sufficient to avoid confounding. So using the example above, a 4 day trip could look like:</p>
+<table class="table" id="treatment-table1">
+<caption><span class="caption-number">Table 1 </span><span class="caption-text">Intersperse treatments in time and space to avoid confounding</span><a class="headerlink" href="#treatment-table1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Day 1</p></th>
+<th class="head"><p>Day 2</p></th>
+<th class="head"><p>Day 3</p></th>
+<th class="head"><p>Day 4</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>On</p></td>
+<td><p>Off</p></td>
+<td><p>On</p></td>
+<td><p>Off</p></td>
+</tr>
+<tr class="row-odd"><td><p>Off</p></td>
+<td><p>On</p></td>
+<td><p>Off</p></td>
+<td><p>On</p></td>
+</tr>
+<tr class="row-even"><td><p>On</p></td>
+<td><p>Off</p></td>
+<td><p>On</p></td>
+<td><p>Off</p></td>
+</tr>
+<tr class="row-odd"><td><p>Off</p></td>
+<td><p>On</p></td>
+<td><p>Off</p></td>
+<td><p>On</p></td>
+</tr>
+</tbody>
+</table>
+<p>For a single trawl, this is the only viable strategy to ensure interspersion. From a deployment point of view, this requires more work from the onboard observer/experimenter. Occasionally we might have to make allowances, but this spread of sampling should be the aim.</p>
+<p>As we add more light treatments into a trip, the sample design becomes more complex. The same principles apply, but it is preferable to have a defined plan rather than attempting to do it on the fly. For example, let’s say we want to look at two colours. If we only had 4 days as above, what would the sample design look like?</p>
+<table class="table" id="treatment-table2">
+<caption><span class="caption-number">Table 2 </span><span class="caption-text">Two-treatment levels</span><a class="headerlink" href="#treatment-table2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Day 1</p></th>
+<th class="head"><p>Day 2</p></th>
+<th class="head"><p>Day 3</p></th>
+<th class="head"><p>Day 4</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Blue</p></td>
+<td><p>Off</p></td>
+<td><p>Green</p></td>
+<td><p>Off</p></td>
+</tr>
+<tr class="row-odd"><td><p>Off</p></td>
+<td><p>Blue</p></td>
+<td><p>Off</p></td>
+<td><p>Green</p></td>
+</tr>
+<tr class="row-even"><td><p>Green</p></td>
+<td><p>Off</p></td>
+<td><p>Blue</p></td>
+<td><p>Off</p></td>
+</tr>
+<tr class="row-odd"><td><p>Off</p></td>
+<td><p>Green</p></td>
+<td><p>Off</p></td>
+<td><p>Blue</p></td>
+</tr>
+</tbody>
+</table>
+<p>Do you see what we have done here? Each Colour treatment has been applied once in each position of the Day. This is somewhat remniscent of the old-school Latin-Square sample design dating back to Fisher (1926). However there is a twist. Each treatment is alternated with a Control. This will be used in the analysis as a blocking factor to deal with the short-range spatial confounding issue, as with the first design.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Interspersion of some kind is <em>always</em> a best practice in experimental design. Note however, that as we add more lights and combinations into the mix, an extra level of complexity is introduced. If we want to look at 3 colours with 3 flash combinations, for example, we might not be able to examine them all within a trip. This is where we make decisions about whether to squeeze the whole design into a single trip, or sequentially examine particular sets within a trip. Of course this introduces a higher level (between-trip) of statisical confounding.</p>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sample design is about addressing specific questions. There will always be some compromise and we can’t let the demands of sample design ‘elegance’ outshadow what we are actually trying to achieve. A series of independent answers to the right questions is more important than an elegant but inefficient grand sampling plan, that is effectively unworkable.</p>
+</div>
+</div>
+</div>
+<div class="section" id="but-wait-no-two-replicates-are-exactly-the-same">
+<h2>But wait… no two replicates are <em>exactly</em> the same!<a class="headerlink" href="#but-wait-no-two-replicates-are-exactly-the-same" title="Permalink to this headline">¶</a></h2>
+<p>Let’s take a step back and think of what a <em>Control</em> is. The nomenclature is a bit unfortunate, and derives from the concept of a ‘controlled experiment’, in which all external factors are ‘controlled’ by the experimenter. This is the sort of thing we would do in engineering for example. We would keep all variables in a laboratory fixed, and manipulate only the one variable we were interested in to measure its effect.</p>
+<p>But ecological systems just don’t work that way. This was the cue for a guy called Ronald Fisher who in  the 1920’s realised that we don’t need to physically control everything in the environment. We need to ensure that all the nuisance variables are random <em>with respect to the experimental treatment</em>. So it doesn’t matter if we don’t conduct all trial replicates on exactly the same tidal cycle, as long as replicates are sampled randomly across the range of possible tidal cycles.</p>
+<p>Now of course with low numbers of replicates in particular, a simple random allocation of treatments might just happen to align with periodicities such as tides. So we can force some interspersion to ensure that each combination of tides is sampled during each treatment across the experiment. This is the basis of the sample designs above. These extraneous factors are modeled in the analysis, and their effects estimated and removed and effectively corrected for.</p>
+<p>Recognising sources of confounding can be a challenge. But failure to do so invalidates the trial, and no amount</p>
+</div>
+<div class="section" id="some-general-guidelines-for-single-vs-twin-or-multi-rigs">
+<h2>Some general guidelines for single vs twin or multi-rigs<a class="headerlink" href="#some-general-guidelines-for-single-vs-twin-or-multi-rigs" title="Permalink to this headline">¶</a></h2>
+<p>There are two features of a single trawl design that are, quite frankly, a pain in the ass.</p>
+<ol class="simple">
+<li><p>Interspersion of the samples in time and space requires very careful planning</p></li>
+<li><p>Even with effective interspersion, there will be a considerable element of spatio-temporal variability between treatment-control pairs. The centers of the trawls could be 15 knots apart if the vessel is steaming in a straight line.</p></li>
+<li><p>The design takes a long time to implement. If we have only 16 trawls available over 4 days, then we have only 8 pairs of light-on/off as out level of replication.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If at all possible, a twin-rig comparison should be used in preference to a single rig.</p>
+</div>
+<p>If the vessel is a twin-rig outfit, life becomes a whole lot easier from the sample design point of view but, as we discuss later, it becomes more of an on-deck pain in the ass. However, the potential for confounding gains an extra level of complexity.</p>
+<p>Different sides of a vessel usually fish differently, but not necessarily consistently. For example, the Port net might be newer, with a slightly different height resulting in different catches. One of the vessels we work with has a ground in the Irish Sea over which he fishes in a 4 mile diameter circle, counter-clockwise. This introduces systematic differences, which may not be consistent in intensity depending on the tidal flow. Tricky, huh?</p>
+<div class="figure align-default" id="twin-trawls">
+<a class="reference internal image-reference" href="../_images/TwinTrawls.jpg"><img alt="../_images/TwinTrawls.jpg" src="../_images/TwinTrawls.jpg" style="height: 350px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">There are many reasons why different sides of a vessel may fish differently. The skipper will usually have a good sense of under which conditions different sides will perform, and it pays to listen to them. But keep an open mind.</span><a class="headerlink" href="#twin-trawls" title="Permalink to this image">¶</a></p>
+</div>
+<p>The on-board conduct of a twin-rig trial requires some thought, planning, and some mental walk-through and rehearsals to work effectively. There are a few considerations:</p>
+<ul class="simple">
+<li><p>How many sets of lights, and how do we manage them?
+Ideally in a twin-rig we have a set of lights on each and we turn them on and off as per the schedule.</p></li>
+<li><p>Can we turn one net off without inadvertently turning the other net off as well?
+The lights use the same remote frequency. You need to consider how to ensure you don’t screw up your treatments. At present, this problem is exacerbated by Helios - which currently uses the same remote control.</p></li>
+<li><p>If we only have one kit of Pisces available, how can we intersperse the treatments?
+Moving the lights every single haul is a sure recipe for getting thrown off the boat into the North Sea. We need to develop an alternative strategy.</p></li>
+<li><p>If we only have one kit of Pisces, does this introduce confounding?
+Yep. What differs between the treatment and control nets in addition to lighting? The physical presence of the lights themselves. While Pisces is not particularly heavy in water, it <em>can</em> distort the shape of the net particularly if deployed on the roof. Will it make a difference? Hopefully not.</p></li>
+<li><p>So, I have two nets of fish and/or <em>Nephrops</em> being dropped into the same hopper. Does it matter?
+Yes… This is a tricky one to deal with and something that needs to be sorted out with the skipper and crew to minimise disruption. If SNT have hired the vessel, this can be dealt with at the hopper offerloading stage. If we are working in with the vessel’s normal operation, the approach will depend on what you can sort out on the boat. On Virtuous, Tom has been known to jump into the hopper to get the correct subsample. On Golden Ray, we can generally sample the first haul early and wait for the catch to clear before getting the next sample.<br />
+If we are fitting in with normal operations, the process will not be perfect so we just have to do the best we can.</p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./trialsscience"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="trialsplacement.html" title="previous page">Pisces placement on the gear</a>
+    <a class='right-next' id="next-link" href="trialssampling.html" title="next page">On-board trial conduct and sampling</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Craig Syms<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
