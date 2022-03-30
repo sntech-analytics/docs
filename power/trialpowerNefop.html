@@ -1,0 +1,460 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case study 2: How many scallop dredges do we need to sample to make sure we can detect a biologically important reduction in flatfish bycatch? &#8212; SafetyNet Tech data analytics manual</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ionos server setup" href="../ionosserver/ionosserversetup.html" />
+    <link rel="prev" title="Case study 1: How many trawls do we need to sample to make sure we can detect a biologically important effect?" href="trialpowerCosgrove.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/safetynet_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">SafetyNet Tech data analytics manual</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landing-page.html">
+   SafetyNet Technologies data analytics manifesto
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Pisces trial design
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsscience/trialsintro.html">
+   How do we develop Pisces trial protocols?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsscience/trialsplacement.html">
+   Pisces placement on the gear
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsscience/trialsdesign.html">
+   Allocating samples in space and time
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsscience/trialssampling.html">
+   On-board trial conduct and sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsscience/trialsdataentry.html">
+   Data entry and management
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Statistical power and trials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="trialpowerCosgrove.html">
+   Case study 1: How many trawls do we need to sample to make sure we can detect a biologically important effect?
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Case study 2: How many scallop dredges do we need to sample to make sure we can detect a biologically important reduction in flatfish bycatch?
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Ionos VPS server
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ionosserver/ionosserversetup.html">
+   Ionos server setup
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Pisces trial database
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsdatabase/trialsprocessing.html">
+   Pisces trial data pre-processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../trialsdatabase/trialsupload.html">
+   Pisces trial database upload
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/power/trialpowerNefop.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-exploration">
+   Initial exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-the-dredges-an-unbiased-sample-device">
+     Are the dredges an unbiased sample device?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-do-the-catch-distributions-look-like">
+     What do the catch distributions look like?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#next-challenge-come-up-with-a-model-we-can-use-to-simulate-some-data">
+     Next challenge: come up with a model we can use to simulate some data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="case-study-2-how-many-scallop-dredges-do-we-need-to-sample-to-make-sure-we-can-detect-a-biologically-important-reduction-in-flatfish-bycatch">
+<h1>Case study 2: How many scallop dredges do we need to sample to make sure we can detect a biologically important reduction in flatfish bycatch?<a class="headerlink" href="#case-study-2-how-many-scallop-dredges-do-we-need-to-sample-to-make-sure-we-can-detect-a-biologically-important-reduction-in-flatfish-bycatch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>One feature that consistently emerges is that real world data are often less well-behaved than those in the studies that make it to publication. In the previous example of finfish and Nephrops separation we would seem to have a fair chance of detecting effects, if they were present.</p>
+<p>Onto a real world example. We will be conducting trials this year (2022) to test if Pisces can reduce numbers of flatfish - primarily Yellowtail flounder - that are caught in scallop dredges in the Northwest Atlantic. In the trial design section I illustrated some of the issues and considerations we evaluate when designing a trial. An important piece of the trial design puzzle is simulating data to ascertain how much <em>sampling effort</em> we will need to detect an effect - if it is indeed present. When there is preliminary data available, there is no excuse not to use this to make informed decisions about the trial conduct.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>I cannot stress enough the importance of either getting pilot data from some source, or simulating data using realistic published parameter estimates.<br />
+Trials are expensive. We don’t want to get to the end of a study with an equivocal result simply because we planned the ‘ideal’ study from an armchair, without any reality checks.</p>
+</div>
+</div>
+<p>The data set available for this trial comes from the Northeast Fisheries Observer Program (NEFOP). Fortuitously, one of their data sets is of flatfish bycatch on scallop dredges in the same closed (rather paradoxically called ‘Access’) area of Georges Bank that we will be working in.</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dupaul_team.jpg"><img alt="../_images/dupaul_team.jpg" src="../_images/dupaul_team.jpg" style="height: 300px;" /></a>
+</div>
+</td>
+<td><div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/scallop_dredge.jpg"><img alt="../_images/scallop_dredge.jpg" src="../_images/scallop_dredge.jpg" style="height: 300px;" /></a>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="initial-exploration">
+<h2>Initial exploration<a class="headerlink" href="#initial-exploration" title="Permalink to this headline">¶</a></h2>
+<p>The data were provided in a refreshingly nice tidy flat CSV file - checked, no data errors. The data are the weights of flatfish in each dredge, with a measure of dredge duration. We will need to read these in and convert to Catch Per Unit Effort (CPUE) to standardize the weight to a common unit. In this case, pounds (yes - pounds!) of fish per hour. Once we do this housekeeping, it’s onto the important stuff.</p>
+<p>First things first - plot the data.</p>
+<div class="section" id="are-the-dredges-an-unbiased-sample-device">
+<h3>Are the dredges an unbiased sample device?<a class="headerlink" href="#are-the-dredges-an-unbiased-sample-device" title="Permalink to this headline">¶</a></h3>
+<p>I mentioned above that we need to convert values to effort units - in this case, hours. This <em>standardizes</em> the counts to a common measure. However… it is wise to check that this standardization actually does what we think it’s doing. Let’s plot the CPUE versus effort. There should be <em>no relationship</em>. I use a log scale here to zoom up and stretch out the scales a bit.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/yellowtaileffort1.png"><img alt="../_images/yellowtaileffort1.png" src="../_images/yellowtaileffort1.png" style="height: 300px;" /></a>
+</div>
+<p>Hang on, according to my statistics text there should be no relationship because isn’t that what standardization does?</p>
+<p>Statistics, meet field ecology! We have higher CPUE in the shorter dredges (&lt;30 minutes) and lower CPUE in the longer dredges (&gt;3 hours). There are a couple of possible explanations. Short dredges might have been exploratory drops on hills or the suchlike, which might have had higher abundances of Yellowtail. With longer dredges, we might tow over less optimal habitats (shingle, maybe) which could generate a lowering of the overall average catch. Without knowing exactly what happened on the boat, these are just speculations. However, it would seem wise to restrict our exploration to a more restricted set of dredge durations. Say… 1-3 hours:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/yellowtaileffort1.png"><img alt="../_images/yellowtaileffort1.png" src="../_images/yellowtaileffort1.png" style="height: 300px;" /></a>
+</div>
+<p>That’s better. It just so happens that the decision had been made already to stick to 1 hour dredges for the trial. This would seem to be a good choice.</p>
+</div>
+<div class="section" id="what-do-the-catch-distributions-look-like">
+<h3>What do the catch distributions look like?<a class="headerlink" href="#what-do-the-catch-distributions-look-like" title="Permalink to this headline">¶</a></h3>
+<p>A histogram of the catches is the first point of call. As above I’ve converted to a log scale, simply we can’t see any detail otherwise:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/yellowtailcatch.png"><img alt="../_images/yellowtailcatch.png" src="../_images/yellowtailcatch.png" style="height: 300px;" /></a>
+</div>
+<p>First things first: There are a whole pile of zeroes. 922 out of 2616 data points to be exact.<br />
+This is referred to as zero-inflation - we have more zeroes than might be expected from the theoretical statistical distributions that form the cornerstone of a lot of our analytical methods.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The more geeky types out there may be thinking to themselves “Hang on! The log of zero is undefined. How did you get it on the graph?”<br />
+Well, my pedantic little friends, I actually plotted log10(x+0.1) for illustrative purposes. But well spotted…</p>
+</div>
+</div>
+<p>Second point: Although most of the catches are around the 3 lbs/hour mark, there are a not-inconsiderable number of values up to ~200 lbs/per hour.</p>
+<p>Both of these in combination present analytical problems. Zeroes contain less information than a continuous scale of values, and when there are non-zero values, they are close enough to log-normally distributed.</p>
+</div>
+<div class="section" id="next-challenge-come-up-with-a-model-we-can-use-to-simulate-some-data">
+<h3>Next challenge: come up with a model we can use to simulate some data<a class="headerlink" href="#next-challenge-come-up-with-a-model-we-can-use-to-simulate-some-data" title="Permalink to this headline">¶</a></h3>
+<p>This sample distribution suggests a few alternate models. The one I chose to play with was the Tweedie distribution, which can accommodate both the zeroes and the extreme values, and appropriately scale the variance with the mean (very important!).</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Typically with zero-inflation we have a few models we can apply. They behave similarly so any one approach should put us in the ballpark. Really any one of these could be used:</p>
+<ul class="simple">
+<li><p><strong>Negative binomial</strong>. Technically the negative binomial is a discrete distribution (counts), however a lot of routines to calculate a negbin model will still run. Although they’ll whine and complain about it</p></li>
+<li><p><strong>Zero-inflated and hurdle models</strong>. These are two-stage models where the zeroes are modeled as a binary process first (is there anything in the sample?), then the &gt;0 samples modeled separately. In this data set, the non-zero values are pretty damned closed to log-normal, so we would look possibly at a hurdle log-normal model.</p>
+<ul>
+<li><p>As an aside… Zero inflated models differ from hurdle models in that the <em>statistical process</em> generating the non zero values can also conceivably generate zero values. The difference is not as discrete as for hurdles, which is why hurdle models tend to converge better than ZI (zero inflated) models</p></li>
+</ul>
+</li>
+<li><p><strong>Tweedie models</strong> are a relatively new addition to the statistical arsenal. They fall within the group of exponential dispersion models, and in many R implementations cover the spectrum from Poisson through Negative Binomial to inverse Gaussian</p></li>
+</ul>
+</div>
+</div>
+<p>So how do we simulate a sample distribution? Let’s considerable a normal or bell-shaped distribution. To generate a normal distribution I can write a simple line of code in R and tell it to output 1000 values with (in this case), a mean of 5 and standard deviation of 1:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The normal distribution is described by two parameters - mean, and standard deviation. To generate a dummy data set, we need some reasonable estimates of these values.</p>
+<p>Our observed distribution is nowhere near normal, and I have already decided to use a Tweedie distribution. So what do I need to specify for that one? First, I need the Tweedie value. We can estimate this directly from the data:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">tweedie.profile</span><span class="p">(</span><span class="n">access</span><span class="o">$</span><span class="n">YTCPUE</span> <span class="o">~</span> <span class="m">1</span><span class="p">,</span> <span class="n">do.plot</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The value is ~1.5, so now we can simulate a Tweedie distribution. From the data, the mean catch of Yellowtail was 3.31 lbs/hour. We will use this as our reference or control level. To generate a Tweedie distribution, we need to specify a mean value and a Tweedie parameter. WHy not a standard deviation, I hear you ask? Because the variance/standard deviation changes with the mean. The Tweedie parameter specifies the relationship of this change.</p>
+<p>Let’s be adventurous. How many replicates do we need to sample to detect a 50% reduction in Yellowtail CPUE? We need to do a bit of coding for this step…</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#Function to make our data with defined parameters</span>
+<span class="n">simdat</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">contmean</span><span class="p">,</span> <span class="n">trtmean</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">control</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">contmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.8</span><span class="p">))</span>
+    <span class="nf">names</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;CPUE&quot;</span>
+    <span class="n">trt</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">trtmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.8</span><span class="p">))</span>
+    <span class="nf">names</span><span class="p">(</span><span class="n">trt</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;CPUE&quot;</span>
+    <span class="n">comb</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">trt</span><span class="p">)</span>
+    <span class="n">Light</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Treatment&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">comb2</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">cbind</span><span class="p">(</span><span class="n">Light</span><span class="p">,</span> <span class="n">comb</span><span class="p">))</span>
+    <span class="nf">return</span><span class="p">(</span><span class="n">comb2</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">nreps</span> <span class="o">&lt;-</span><span class="m">1000</span>
+<span class="n">pvalues</span> <span class="o">&lt;-</span> <span class="nf">numeric</span><span class="p">(</span><span class="n">nreps</span><span class="p">)</span>
+
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nreps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">test</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="nf">glm</span><span class="p">(</span><span class="n">CPUE</span> <span class="o">~</span> <span class="n">Light</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">tweedie</span><span class="p">(</span><span class="n">var.power</span> <span class="o">=</span> <span class="m">1.5</span><span class="p">,</span> <span class="n">link.power</span> <span class="o">=</span> <span class="m">0</span><span class="p">),</span>
+          <span class="n">data</span><span class="o">=</span><span class="nf">simdat</span><span class="p">(</span><span class="m">150</span><span class="p">,</span> <span class="m">3.3</span><span class="p">,</span> <span class="m">1.65</span><span class="p">)))</span>
+    <span class="n">pvalues</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">test</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nf">hist</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;150 replicates, 50% change&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>So what have I done here? I made a control distribution with a mean of 3.3, and a treatment distribution in which <em>Pisces</em> (bless its heart), generated a 50% reduction in Yellowtail catches. I specified 150 replicate dredges for ecah treament, and ran the ‘experiment’ 1000 times. What we want to know now, is how many times we got a ‘statistically significant’ result? Remember, I have already set a ‘real’ difference in the means. The probability of <em>not</em> finding a significant effect when there is indeed a difference is the Type II error (β). The <strong>power</strong> of the test is 1-β.</p>
+<p>By convention, most studies aim to achieve a power of 0.8. In  other words, <em>if</em> there is an effect, we should detect it 80% of the time.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./power"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="trialpowerCosgrove.html" title="previous page">Case study 1: How many trawls do we need to sample to make sure we can detect a biologically important effect?</a>
+    <a class='right-next' id="next-link" href="../ionosserver/ionosserversetup.html" title="next page">Ionos server setup</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Craig Syms<br/>
+        
+            &copy; Copyright 2022.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
