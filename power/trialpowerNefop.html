@@ -248,8 +248,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#are-the-dredges-an-unbiased-sample-device">
-     Are the dredges an unbiased sample device?
+    <a class="reference internal nav-link" href="#are-there-any-methodological-issues-we-should-be-aware-of">
+     Are there any methodological issues we should be aware of?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -260,6 +260,28 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#next-challenge-come-up-with-a-model-we-can-use-to-simulate-some-data">
      Next challenge: come up with a model we can use to simulate some data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-have-our-ballpark-figure">
+     We have our ballpark figure
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#trial-conduct">
+       Trial conduct
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#biological-vs-statistical-importance">
+       Biological vs statistical importance
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-comments">
+     Final comments
     </a>
    </li>
   </ul>
@@ -292,16 +314,16 @@ Trials are expensive. We don’t want to get to the end of a study with an equiv
 <p>The data set available for this trial comes from the Northeast Fisheries Observer Program (NEFOP). Fortuitously, one of their data sets is of flatfish bycatch on scallop dredges in the same closed (rather paradoxically called ‘Access’) area of Georges Bank that we will be working in.</p>
 <table class="table">
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 100%" />
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/dupaul_team.jpg"><img alt="../_images/dupaul_team.jpg" src="../_images/dupaul_team.jpg" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/scallop_dredge.jpg"><img alt="../_images/scallop_dredge.jpg" src="../_images/scallop_dredge.jpg" style="height: 300px;" /></a>
 </div>
 </td>
-<td><div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/scallop_dredge.jpg"><img alt="../_images/scallop_dredge.jpg" src="../_images/scallop_dredge.jpg" style="height: 300px;" /></a>
+</tr>
+<tr class="row-even"><td><div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dupaul_team.jpg"><img alt="../_images/dupaul_team.jpg" src="../_images/dupaul_team.jpg" style="height: 300px;" /></a>
 </div>
 </td>
 </tr>
@@ -312,27 +334,25 @@ Trials are expensive. We don’t want to get to the end of a study with an equiv
 <h2>Initial exploration<a class="headerlink" href="#initial-exploration" title="Permalink to this headline">¶</a></h2>
 <p>The data were provided in a refreshingly nice tidy flat CSV file - checked, no data errors. The data are the weights of flatfish in each dredge, with a measure of dredge duration. We will need to read these in and convert to Catch Per Unit Effort (CPUE) to standardize the weight to a common unit. In this case, pounds (yes - pounds!) of fish per hour. Once we do this housekeeping, it’s onto the important stuff.</p>
 <p>First things first - plot the data.</p>
-<div class="section" id="are-the-dredges-an-unbiased-sample-device">
-<h3>Are the dredges an unbiased sample device?<a class="headerlink" href="#are-the-dredges-an-unbiased-sample-device" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="are-there-any-methodological-issues-we-should-be-aware-of">
+<h3>Are there any methodological issues we should be aware of?<a class="headerlink" href="#are-there-any-methodological-issues-we-should-be-aware-of" title="Permalink to this headline">¶</a></h3>
 <p>I mentioned above that we need to convert values to effort units - in this case, hours. This <em>standardizes</em> the counts to a common measure. However… it is wise to check that this standardization actually does what we think it’s doing. Let’s plot the CPUE versus effort. There should be <em>no relationship</em>. I use a log scale here to zoom up and stretch out the scales a bit.</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/yellowtaileffort1.png"><img alt="../_images/yellowtaileffort1.png" src="../_images/yellowtaileffort1.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/yellowtaileffort1.png"><img alt="../_images/yellowtaileffort1.png" src="../_images/yellowtaileffort1.png" style="height: 400px;" /></a>
 </div>
-<p>Hang on, according to my statistics text there should be no relationship because isn’t that what standardization does?</p>
+<p>Hang on, according to my statistics text there should be no relationship because, well, isn’t standardization supposed to remove this relationship?</p>
 <p>Statistics, meet field ecology! We have higher CPUE in the shorter dredges (&lt;30 minutes) and lower CPUE in the longer dredges (&gt;3 hours). There are a couple of possible explanations. Short dredges might have been exploratory drops on hills or the suchlike, which might have had higher abundances of Yellowtail. With longer dredges, we might tow over less optimal habitats (shingle, maybe) which could generate a lowering of the overall average catch. Without knowing exactly what happened on the boat, these are just speculations. However, it would seem wise to restrict our exploration to a more restricted set of dredge durations. Say… 1-3 hours:</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/yellowtaileffort1.png"><img alt="../_images/yellowtaileffort1.png" src="../_images/yellowtaileffort1.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/yellowtaileffort2.png"><img alt="../_images/yellowtaileffort2.png" src="../_images/yellowtaileffort2.png" style="height: 400px;" /></a>
 </div>
-<p>That’s better. It just so happens that the decision had been made already to stick to 1 hour dredges for the trial. This would seem to be a good choice.</p>
+<p>That’s better. It just so happens that the decision had been made already to stick to 1 hour dredges for the trial. This would seem to be a wise decision.</p>
 </div>
 <div class="section" id="what-do-the-catch-distributions-look-like">
 <h3>What do the catch distributions look like?<a class="headerlink" href="#what-do-the-catch-distributions-look-like" title="Permalink to this headline">¶</a></h3>
 <p>A histogram of the catches is the first point of call. As above I’ve converted to a log scale, simply we can’t see any detail otherwise:</p>
 <div class="figure align-center">
-<a class="reference internal image-reference" href="../_images/yellowtailcatch.png"><img alt="../_images/yellowtailcatch.png" src="../_images/yellowtailcatch.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/yellowtailcatch.png"><img alt="../_images/yellowtailcatch.png" src="../_images/yellowtailcatch.png" style="height: 400px;" /></a>
 </div>
-<p>First things first: There are a whole pile of zeroes. 922 out of 2616 data points to be exact.<br />
-This is referred to as zero-inflation - we have more zeroes than might be expected from the theoretical statistical distributions that form the cornerstone of a lot of our analytical methods.</p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <div class="admonition note">
@@ -341,6 +361,8 @@ This is referred to as zero-inflation - we have more zeroes than might be expect
 Well, my pedantic little friends, I actually plotted log10(x+0.1) for illustrative purposes. But well spotted…</p>
 </div>
 </div>
+<p>First things first: There are a whole pile of zeroes. 922 out of 2616 data points to be exact.<br />
+This is (arguably) referred to as zero-inflation - we have more zeroes than might be expected from the theoretical statistical distributions that form the cornerstone of a lot of our analytical methods.</p>
 <p>Second point: Although most of the catches are around the 3 lbs/hour mark, there are a not-inconsiderable number of values up to ~200 lbs/per hour.</p>
 <p>Both of these in combination present analytical problems. Zeroes contain less information than a continuous scale of values, and when there are non-zero values, they are close enough to log-normally distributed.</p>
 </div>
@@ -368,12 +390,18 @@ Well, my pedantic little friends, I actually plotted log10(x+0.1) for illustrati
 </pre></div>
 </div>
 <p>The normal distribution is described by two parameters - mean, and standard deviation. To generate a dummy data set, we need some reasonable estimates of these values.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/normal.png"><img alt="../_images/normal.png" src="../_images/normal.png" style="height: 300px;" /></a>
+</div>
 <p>Our observed distribution is nowhere near normal, and I have already decided to use a Tweedie distribution. So what do I need to specify for that one? First, I need the Tweedie value. We can estimate this directly from the data:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">tweedie.profile</span><span class="p">(</span><span class="n">access</span><span class="o">$</span><span class="n">YTCPUE</span> <span class="o">~</span> <span class="m">1</span><span class="p">,</span> <span class="n">do.plot</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The value is ~1.5, so now we can simulate a Tweedie distribution. From the data, the mean catch of Yellowtail was 3.31 lbs/hour. We will use this as our reference or control level. To generate a Tweedie distribution, we need to specify a mean value and a Tweedie parameter. WHy not a standard deviation, I hear you ask? Because the variance/standard deviation changes with the mean. The Tweedie parameter specifies the relationship of this change.</p>
-<p>Let’s be adventurous. How many replicates do we need to sample to detect a 50% reduction in Yellowtail CPUE? We need to do a bit of coding for this step…</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/tweedie.png"><img alt="../_images/tweedie.png" src="../_images/tweedie.png" style="height: 300px;" /></a>
+</div>
+<p>The value is ~1.5, so now we can simulate a Tweedie distribution. From the data, the mean catch of Yellowtail was 3.31 lbs/hour. We will use this as our reference or control level. To generate a Tweedie distribution, we need to specify a mean value and a Tweedie parameter. Why not a standard deviation, I hear you ask? Because the variance/standard deviation changes with the mean. The Tweedie parameter specifies the relationship of this change.</p>
+<p>Let’s be adventurous. How many replicates do we need to sample to detect a 50% reduction in Yellowtail CPUE? We need to do get our coding geek on for this step…</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#Function to make our data with defined parameters</span>
 <span class="n">simdat</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">contmean</span><span class="p">,</span> <span class="n">trtmean</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">control</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">contmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.8</span><span class="p">))</span>
@@ -399,8 +427,81 @@ Well, my pedantic little friends, I actually plotted log10(x+0.1) for illustrati
 <span class="nf">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>So what have I done here? I made a control distribution with a mean of 3.3, and a treatment distribution in which <em>Pisces</em> (bless its heart), generated a 50% reduction in Yellowtail catches. I specified 150 replicate dredges for ecah treament, and ran the ‘experiment’ 1000 times. What we want to know now, is how many times we got a ‘statistically significant’ result? Remember, I have already set a ‘real’ difference in the means. The probability of <em>not</em> finding a significant effect when there is indeed a difference is the Type II error (β). The <strong>power</strong> of the test is 1-β.</p>
+<p>So what have I done here? I made a control distribution with a mean of 3.3, and a treatment distribution in which <em>Pisces</em> (bless its heart), generated a 50% reduction in Yellowtail catches. I specified 150 replicate dredges for each treament, and ran the ‘experiment’ 1000 times. What we want to know now, is how many times we got a ‘statistically significant’ result? Remember, I have already set a ‘real’ difference in the means. The probability of <em>not</em> finding a significant effect when there is indeed a difference is the Type II error (β). The <strong>power</strong> of the test - for a defined effect size, and at a specified level of replication - is 1-β.</p>
 <p>By convention, most studies aim to achieve a power of 0.8. In  other words, <em>if</em> there is an effect, we should detect it 80% of the time.</p>
+<div class="admonition-statistical-significance-type-ii-error-power-1-effect-size-and-n admonition">
+<p class="admonition-title">Statistical significance (α), Type II error (β), power (1-β), effect size and <em>n</em></p>
+<p>I really don’t want to get into this in detail, because the whole classical statistics things is just annoying and I’m kind of sick of it. But let’s get some basic terms and concepts out of the way.
+In the classical approach we <em>test</em> hypotheses, not prove them. Our aim is to attempt to reject  hypotheses. Indeed to paraphrase Karl Popper “Science proceeds by bold conjectures, and ingenious attempts to refute them”. Well, we are a bit less ambitious. In practice we set up a bit of a straw man <strong>null hypothesis</strong> and try to reject that. The Null hypothesis is simply <em>there is no difference between the groups</em>.<br />
+But of course there is variability in systems, and no samples are exactly the same. So what we need to do is evaluate the observed difference between sample and control values (say) given natural variability described by some statistical distribution. The normal distribution, for example.<br />
+Most of you should have a passing familiarity with <em>statistical significance</em>. This is the p-value or α, and also called the Type I error. The p-value is the probability that <em>if you ran the sample program a gazillion times</em>, and <em>if the Null Hypothesis was TRUE</em> you would reject the Null Hypothesis. In other words, a <strong>false positive</strong>.  By convention, we use a value of 0.05. So, we accept that 5% of the time we would interpret the result as there being a ‘significant’ effect, when in fact there wasn’t.<br />
+The flip side of the Type I error is Type II error, or β. This is the probability that <em>if you ran the sample program a gazillion times</em>, and <em>if the Null Hypothesis was FALSE</em> that you would <em>fail</em> to reject the Null Hypothesis. In other words, a <strong>false negative</strong>. Changing the α level will automatically change the β level.<br />
+The <em>power</em> is 1-β. In words, the power is the probability that <em>if you ran the sample program a gazillion times</em>, and <em>if the Null Hypothesis was FALSE</em>, that you would correctly reject the null hypothesis.</p>
+</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>So does the p-value say anything about the truth or otherwise of the hypothesis? Sorry to burst the bubble, but no it doesn’t. Although many people, including researchers who obviously weren’t paying attention in Stats 101, interpret it as such. You will have noted my wording: <em>if you ran the sample program a gazillion times</em>… The probability refers to how many times you would get the <em>data</em> <strong>if the hypothesis was true</strong>. In probability terms, this is p(data|hypothesis). In words, the posterior probability of the data given the hypothesis. A more useful measure would be: p(hypothesis|data), or the posterior probability of the hypothesis given the data. However to calculate this we need Bayes Theorem, and requires a value: p(hypothesis). This is the <em>prior probability</em> of the hypothesis, and needs to be specified beforehand. This causes great wailing and gnashing of teeth amongst classical statisticians.<br />
+For our purposes, does it matter too much? Aside from the philosophical angst of Classical vs Bayesian statistics, probably not. Our interpretation is largely based on the weight of the evidence, but don’t be tempted to interpret results as measures of proof of hypotheses.</p>
+</div>
+</div>
+<p>Enough of the distraction. So what is the power of a test to detect a 50% reduction in bycatch with 150 replicates <em>each</em> of the light vs control dredges? If we ran the experiment 1000 times, we would correctly identify an effect about 73% of the time. This is not too far off our preferred power of 0.8 (80%). But that’s a lot of replicates. What would our power to detect a 50% change be if we only(!) had 100 replicates? We would only correctly reject the null hypothesis around 58% of the time. This is not too crash hot…</p>
+<p>What if <em>Pisces</em> was really rocking, and reduced bycatch to 1/3 of our baseline value? We start to get acceptable power (0.812) with around 75 replicates.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will note I seem a bit vague with my wording. <em>Around</em> 75 replicates, for example. This is not Australian understatement. This is because power calculations are based on estimates. I am assuming our observed mean value of 3.3 is the ‘true’ value. It is of course an estimate with a standard error. Similarly, the tweedie parameter I used is an estimate from the data. It too has a standard error. I also ran 1000 simulations, so even if the mean and the Tweedie factors were measured without error, there would still be a standard error on the power estimate.<br />
+These values simply give us a ballpark, but it’s better than nothing!</p>
+</div>
+</div>
+</div>
+<div class="section" id="we-have-our-ballpark-figure">
+<h3>We have our ballpark figure<a class="headerlink" href="#we-have-our-ballpark-figure" title="Permalink to this headline">¶</a></h3>
+<p>Detecting 50% reduction in Yellowtail flounder bycatch in this fishery, all else being equal, will be a stretch. Realistically we should be able to detect somewhere between 50-67% reduction with 100 replicates, but for a 67% change, anywhere over 75 replicates should suffice.  Of course the big assumption here is that Pisces is actually working to generate this very large effect. Scallop dredges are towed quickly (~5kts), and flatfish are reticent about moving until objects are on top of them.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I like not this news! Bring me other news!</p>
+</div>
+<p>There are a few cards in our hand.</p>
+<div class="section" id="trial-conduct">
+<h4>Trial conduct<a class="headerlink" href="#trial-conduct" title="Permalink to this headline">¶</a></h4>
+<p>This analysis assumes we are running a trial in which each haul is either light or control. The variability in hauls we are basing the power estimates on is reflective of the <em>between haul</em> variance. In the upcoming trial we will have a twin rig setup.  <strong>If</strong> the dredges within a haul fish similarly - and there is a high likelihood they will - a paired design will be able to account for and remove much of this variability. The way this works is that the mean value of each haul is estimated and ‘removed’ from the model, and the response variable effectively becomes the <em>difference</em> between the treatment and control. This can and should considerably increase the power of the test.</p>
+<p>The second element to consider is that Pisces needs to be given the best chance of working. We will need to exert a large effect to be detectable. We can try to prevent flatfish entering the dredge, but given what we know about their behaviour this might not work. However there is also a Plan B. Pisces might work better to illuminate the escape mesh. These are all things to consider on pilot trials.</p>
+</div>
+<div class="section" id="biological-vs-statistical-importance">
+<h4>Biological vs statistical importance<a class="headerlink" href="#biological-vs-statistical-importance" title="Permalink to this headline">¶</a></h4>
+<p>Our focus here has been on detecting the statistical difference between the the two means. The nature of the data is that there are a lot of zeroes, and a pile of big values. Note the mean value itself is rather modest - around 3.3 pounds of fish per hour. What if we think outside the box and think to how catches with 50% and 67% reductions in bycatch scale up to the level of a fishing trip? In real terms, what does this look like?</p>
+<p>Let’s look at the catches of each of 100 dredges over a single trip under three scenarios: Control, 50% and 67% reductions:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/FishPoundsTrip.png"><img alt="../_images/FishPoundsTrip.png" src="../_images/FishPoundsTrip.png" style="height: 400px;" /></a>
+</div>
+<p>There are some inescapable features. There are lots of zeroes and - even with the change in mean - even if our putative effect is operating, we are still going to get some dredges with big catches. This is important to keep in mind. If the fisher sees the big catches, they may be tempted to think the gear is not working. We need to maintain perspective.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Fish are not a statistical distribution. However, we seem to have modeled the clumped behavior OK with the Tweedie distribution. And from experience with fish and fish data, I think this is probably a reasonable approximation of what might happen. Reducing the mean value did not remove the aggregations, so this simulation seems to retain that element of fish behavior.<br />
+The unknown element is how Yellowtail flounder respond to Pisces. If we hit these big aggregations, does this behaviour interact with their response to light? Will a group of fish flee, or hunker down and get caught? This is where video on the dredge will come into play</p>
+</div>
+</div>
+<p>There is a lot of spread of values under the different Pisces effect scenarios for any single trip. What if we sum up their effects over, say, 100 trips?</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/FishPounds100Trips.png"><img alt="../_images/FishPounds100Trips.png" src="../_images/FishPounds100Trips.png" style="height: 400px;" /></a>
+</div>
+<p>Now we’re talking. Each of these points is a total catch for a 100 tow trip. Over a few seasons, the total catch does indeed follow our expectation, given I manually set the effect size. It should also become apparent that even if Pisces has a more modest effect that might not tip the <em>statistically significant</em> scale, at the level of removal of Yellowtail from the population this effect will be important at the fishery management scale. A more suitable measure of effect might be the total catch over the cruise, with a suitable randomization error estimate (bootstrap, Monte Carlo or similar).</p>
+</div>
+</div>
+<div class="section" id="final-comments">
+<h3>Final comments<a class="headerlink" href="#final-comments" title="Permalink to this headline">¶</a></h3>
+<p>A ballpark figure of 100 replicates per light treatment in a paired design should give ~0.8 power to detect a somewhere between 50-67% reduction in Yellowtail bycatch. Even if the statistical difference is a bit marginal, the total catch with a suitable error estimate should provide a fishery-relevant estimate of a bycatch reduction effect. We are asking quite a lot of Pisces, so we need to find the configuration to give the fish the best chance of responding and avoiding capture. The response will need to be sizeable to be detectable. A paired design will almost certainly improve our chances to detect effects, and I encourage you to check out the chapters on trial design.</p>
+<p>This exploration is conditional on this data set being representative of what we will encounter. In this case, the data set is sizeable and robust. If it were smaller and less extensive, we might be more cautious. However this foray has demonstrated a few things:</p>
+<ul class="simple">
+<li><p>Time spent exploring pilot data of some sort is rarely wasted</p></li>
+<li><p>In contrast with our first case study, the real world is often a lot messier than data from a custom trial that made it into a journal might suggest</p></li>
+<li><p>There is no need to get too wrapped up in theoretical power calculations. In the age of modern computing, we can just throw computer grunt at the problem to get a robust answer</p></li>
+</ul>
 </div>
 </div>
 </div>
