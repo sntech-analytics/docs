@@ -345,7 +345,7 @@ Trials are expensive. We don’t want to get to the end of a study with an equiv
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/yellowtaileffort2.png"><img alt="../_images/yellowtaileffort2.png" src="../_images/yellowtaileffort2.png" style="height: 400px;" /></a>
 </div>
-<p>That’s better. It just so happens that the decision had been made already to stick to 1 hour dredges for the trial. This would seem to be a wise decision.</p>
+<p>That’s better. It just so happens that the decision had been made already to stick to 1 hour dredges for the trial. This would seem to be a wise choice.</p>
 </div>
 <div class="section" id="what-do-the-catch-distributions-look-like">
 <h3>What do the catch distributions look like?<a class="headerlink" href="#what-do-the-catch-distributions-look-like" title="Permalink to this headline">¶</a></h3>
@@ -363,12 +363,20 @@ Well, my pedantic little friends, I actually plotted log10(x+0.1) for illustrati
 </div>
 <p>First things first: There are a whole pile of zeroes. 922 out of 2616 data points to be exact.<br />
 This is (arguably) referred to as zero-inflation - we have more zeroes than might be expected from the theoretical statistical distributions that form the cornerstone of a lot of our analytical methods.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Why <em>arguably</em>?<br />
+Zero-inflated analyses are a relatively new buzzword, and every biostatistician Poindexter wants to demonstrate their cleverness  by referring to them. However, large numbers of zeroes are accommodated by some bog-standard distributions such as the negative binomial.</p>
+</div>
+</div>
 <p>Second point: Although most of the catches are around the 3 lbs/hour mark, there are a not-inconsiderable number of values up to ~200 lbs/per hour.</p>
 <p>Both of these in combination present analytical problems. Zeroes contain less information than a continuous scale of values, and when there are non-zero values, they are close enough to log-normally distributed.</p>
 </div>
 <div class="section" id="next-challenge-come-up-with-a-model-we-can-use-to-simulate-some-data">
 <h3>Next challenge: come up with a model we can use to simulate some data<a class="headerlink" href="#next-challenge-come-up-with-a-model-we-can-use-to-simulate-some-data" title="Permalink to this headline">¶</a></h3>
-<p>This sample distribution suggests a few alternate models. The one I chose to play with was the Tweedie distribution, which can accommodate both the zeroes and the extreme values, and appropriately scale the variance with the mean (very important!).</p>
+<p>This sample distribution suggests a few alternate models. The one I chose to play with was the Tweedie distribution, which can accommodate both the zeroes and the extreme values, and appropriately scale the variance with the mean (very important!). It is also a continuous distribution, unlike the negative binomial (for example) which would have been an obvious candidate.</p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <div class="admonition note">
@@ -385,7 +393,7 @@ This is (arguably) referred to as zero-inflation - we have more zeroes than migh
 </ul>
 </div>
 </div>
-<p>So how do we simulate a sample distribution? Let’s considerable a normal or bell-shaped distribution. To generate a normal distribution I can write a simple line of code in R and tell it to output 1000 values with (in this case), a mean of 5 and standard deviation of 1:</p>
+<p>So how do we simulate a sample distribution? Let’s use as an example a normal or bell-shaped distribution. To generate a random realization of this distribution I can write a simple line of code in R and tell it to output 1000 values with (in this case), a mean of 5 and standard deviation of 1:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -400,13 +408,35 @@ This is (arguably) referred to as zero-inflation - we have more zeroes than migh
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/tweedie.png"><img alt="../_images/tweedie.png" src="../_images/tweedie.png" style="height: 300px;" /></a>
 </div>
-<p>The value is ~1.5, so now we can simulate a Tweedie distribution. From the data, the mean catch of Yellowtail was 3.31 lbs/hour. We will use this as our reference or control level. To generate a Tweedie distribution, we need to specify a mean value and a Tweedie parameter. Why not a standard deviation, I hear you ask? Because the variance/standard deviation changes with the mean. The Tweedie parameter specifies the relationship of this change.</p>
+<p>One parameter down, one to go. Now we need the dispersion parameter <em>phi</em>. We can estimate this from an intercept-only model, given the estimated Tweedie parameter:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">&lt;-</span> <span class="nf">glm</span><span class="p">(</span><span class="n">YTCPUE</span> <span class="o">~</span> <span class="m">1</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="nf">tweedie</span><span class="p">(</span><span class="n">var.power</span> <span class="o">=</span> <span class="m">1.5</span><span class="p">,</span> <span class="n">link.power</span> <span class="o">=</span> <span class="m">0</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">access</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">model1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Call:
+glm(formula = YTCPUE ~ 1, family = tweedie(var.power = 1.5, link.power = 0), 
+    data = access)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.6977  -2.6977  -0.9094   0.3941  18.4089  
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.19695    0.04091   29.26   &lt;2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for Tweedie family taken to be 7.964662)
+</pre></div>
+</div>
+<p>The Tweedie value is ~1.5, and the dispersion parameter is 7.96. So now we can simulate a Tweedie distribution. From the data, the mean catch of Yellowtail was 3.31 lbs/hour. We will use this as our reference or control level. To generate a Tweedie distribution, we need to specify a mean value, a Tweedie parameter, and a dispersion measure.</p>
 <p>Let’s be adventurous. How many replicates do we need to sample to detect a 50% reduction in Yellowtail CPUE? We need to do get our coding geek on for this step…</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#Function to make our data with defined parameters</span>
 <span class="n">simdat</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">contmean</span><span class="p">,</span> <span class="n">trtmean</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">control</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">contmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.8</span><span class="p">))</span>
+    <span class="n">control</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">contmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.96</span><span class="p">))</span>
     <span class="nf">names</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;CPUE&quot;</span>
-    <span class="n">trt</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">trtmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.8</span><span class="p">))</span>
+    <span class="n">trt</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">trtmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.96</span><span class="p">))</span>
     <span class="nf">names</span><span class="p">(</span><span class="n">trt</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;CPUE&quot;</span>
     <span class="n">comb</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">trt</span><span class="p">)</span>
     <span class="n">Light</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Control&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="nf">rep</span><span class="p">(</span><span class="s">&quot;Treatment&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -460,11 +490,11 @@ These values simply give us a ballpark, but it’s better than nothing!</p>
 <div class="section" id="we-have-our-ballpark-figure">
 <h3>We have our ballpark figure<a class="headerlink" href="#we-have-our-ballpark-figure" title="Permalink to this headline">¶</a></h3>
 <p>Detecting 50% reduction in Yellowtail flounder bycatch in this fishery, all else being equal, will be a stretch. Realistically we should be able to detect somewhere between 50-67% reduction with 100 replicates, but for a 67% change, anywhere over 75 replicates should suffice.  Of course the big assumption here is that Pisces is actually working to generate this very large effect. Scallop dredges are towed quickly (~5kts), and flatfish are reticent about moving until objects are on top of them.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>I like not this news! Bring me other news!</p>
 </div>
-<p>There are a few cards in our hand.</p>
+<p>There are a few cards still to be played from our hand.</p>
 <div class="section" id="trial-conduct">
 <h4>Trial conduct<a class="headerlink" href="#trial-conduct" title="Permalink to this headline">¶</a></h4>
 <p>This analysis assumes we are running a trial in which each haul is either light or control. The variability in hauls we are basing the power estimates on is reflective of the <em>between haul</em> variance. In the upcoming trial we will have a twin rig setup.  <strong>If</strong> the dredges within a haul fish similarly - and there is a high likelihood they will - a paired design will be able to account for and remove much of this variability. The way this works is that the mean value of each haul is estimated and ‘removed’ from the model, and the response variable effectively becomes the <em>difference</em> between the treatment and control. This can and should considerably increase the power of the test.</p>
