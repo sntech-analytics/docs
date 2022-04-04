@@ -431,7 +431,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 </pre></div>
 </div>
 <p>The Tweedie value is ~1.5, and the dispersion parameter is 7.96. So now we can simulate a Tweedie distribution. From the data, the mean catch of Yellowtail was 3.31 lbs/hour. We will use this as our reference or control level. To generate a Tweedie distribution, we need to specify a mean value, a Tweedie parameter, and a dispersion measure.</p>
-<p>Let’s be adventurous. How many replicates do we need to sample to detect a 50% reduction in Yellowtail CPUE? We need to do get our coding geek on for this step…</p>
+<p>Let’s be adventurous. How many replicates do we need to sample to detect a 50% reduction in Yellowtail CPUE? We need to get our coding geek on for this step…</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#Function to make our data with defined parameters</span>
 <span class="n">simdat</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">contmean</span><span class="p">,</span> <span class="n">trtmean</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">control</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rtweedie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xi</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">contmean</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="m">7.96</span><span class="p">))</span>
